@@ -7,9 +7,12 @@ export const GLOBAL_STYLES = `
     --gd:#1b5e20;--gm:#2e7d32;--gb:#4caf50;--gl:#66bb6a;
     --w:#f8fffe;--ow:#e8f5e9;--td:#0d2137;--tm:#2c4a5a;
   }
+
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
   html{scroll-behavior:smooth;}
   body{font-family:'DM Sans',sans-serif;background:var(--w);color:var(--td);overflow-x:hidden;}
+
+  /* ==================== ORIGINAL STYLES ==================== */
 
   /* NAV */
   .vn-nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(10,61,98,0.97);backdrop-filter:blur(12px);padding:0.85rem 2rem;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid rgba(79,195,247,0.25);}
@@ -191,108 +194,237 @@ export const GLOBAL_STYLES = `
   .vn-footer strong{color:var(--bl);}
   .vn-fphone{color:var(--gl);font-size:1rem;font-weight:700;display:block;margin-bottom:0.4rem;text-decoration:none;}
 
-   /* WHATSAPP FLOATING BUTTON */
-  .vn-wa {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    z-index: 9999;
-    display: flex;
-    align-items: center;
+  /* ==================== IMPROVED MOBILE RESPONSIVENESS ==================== */
+
+  /* Mobile Nav */
+  .vn-nav {
+    padding: 1rem 1.2rem;
+    flex-direction: column;
     gap: 12px;
-    background: #25d366;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 600;
-    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
-    transition: all 0.3s ease;
+  }
+
+  .vn-nav-links {
+    display: none;
+  }
+
+  @media (min-width: 769px) {
+    .vn-nav {
+      flex-direction: row;
+      padding: 0.85rem 2rem;
+    }
+    .vn-nav-links {
+      display: flex;
+    }
+  }
+
+  /* Hero Mobile */
+  .vn-hero {
+    padding: 5.5rem 1.2rem 4rem;
+    min-height: auto;
+  }
+
+  .vn-hero-in {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2.5rem;
+  }
+
+  .vn-hero p {
+    font-size: 1rem;
+    max-width: 100%;
+    line-height: 1.65;
+  }
+
+  .vn-phone-link {
+    font-size: 1.1rem;
+    padding: 0.7rem 1.6rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .vn-hero-btns {
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .vn-btn-p, .vn-btn-s {
+    width: 100%;
+    max-width: 280px;
+    padding: 0.9rem 2rem;
+  }
+
+  /* General Section Spacing */
+  .vn-sec {
+    padding: 4.5rem 1.2rem;
+  }
+
+  .vn-con {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* Process */
+  .vn-proc-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .vn-proc-grid::before {
+    display: none;
+  }
+
+  /* Gallery */
+  .vn-ggrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  /* Contact */
+  .vn-ctc-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .vn-fcard, .vn-icard {
+    padding: 1.8rem;
+  }
+
+  /* Typography */
+  .vn-ttl {
+    margin-bottom: 1.2rem;
+    line-height: 1.1;
+  }
+
+  .vn-sub {
+    margin-bottom: 2.5rem;
+  }
+
+  /* WhatsApp Button */
+  .vn-wa {
+    bottom: 20px;
+    right: 15px;
+    padding: 10px 16px;
+    gap: 8px;
+    font-size: 0.92rem;
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.35);
   }
 
   .vn-wa:hover {
-    transform: translateY(-4px) scale(1.05);
-    box-shadow: 0 15px 35px rgba(37, 211, 102, 0.5);
+    transform: translateY(-3px);
   }
 
-  .vn-wa-label {
-    font-size: 0.98rem;
-    white-space: nowrap;
-  }
-
-  .vn-wa-btn {
-    position: relative;
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255,255,255,0.25);
-    border-radius: 50%;
-  }
-
-  .vn-wa-pulse {
-    position: absolute;
-    inset: -10px;
-    background: #25d366;
-    border-radius: 50%;
-    animation: wa-pulse 2.2s ease-in-out infinite;
-    opacity: 0.35;
-    z-index: -1;
-  }
-
-  @keyframes wa-pulse {
-    0%, 100% { transform: scale(0.7); opacity: 0.3; }
-    50% { transform: scale(1.4); opacity: 0; }
-  }
-
-  /* Mobile adjustment */
+  /* Final Mobile Tweaks */
   @media (max-width: 768px) {
-    .vn-wa {
-      bottom: 20px;
-      right: 20px;
-      padding: 10px 16px;
-      gap: 10px;
+    .vn-hero h1 {
+      font-size: clamp(2.1rem, 7vw, 2.8rem);
     }
-    .vn-wa-label {
-      font-size: 0.9rem;
+    
+    .vn-stat {
+      padding: 0.8rem 1rem;
+      border-right: none;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .vn-stat:last-child {
+      border-bottom: none;
+    }
+    
+    .vn-svc-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .vn-why-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .vn-gi {
+      height: 220px;
     }
   }
+    /* Enhanced Drop Visual */
+.vn-drop {
+  filter: drop-shadow(0 25px 50px rgba(26,111,168,0.6));
+}
 
-/* Responsive adjustment */
+.vn-dropsvg {
+  width: 100%;
+  height: 100%;
+}
+
+
+/* IMPROVED WHATSAPP FLOATING BUTTON */
+.vn-wa {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #25d366;
+  color: white;
+  padding: 14px 20px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+}
+
+.vn-wa:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 15px 40px rgba(37, 211, 102, 0.5);
+}
+
+.vn-wa-icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+
+.vn-wa-label {
+  white-space: nowrap;
+}
+
+.vn-wa-pulse {
+  position: absolute;
+  inset: -12px;
+  background: #25d366;
+  border-radius: 50%;
+  animation: wa-pulse 2.5s ease-in-out infinite;
+  opacity: 0.25;
+  z-index: -1;
+}
+
+/* Pulse Animation */
+@keyframes wa-pulse {
+  0%, 100% { transform: scale(0.6); opacity: 0.3; }
+  50% { transform: scale(1.4); opacity: 0; }
+}
+
+/* Mobile adjustments */
 @media (max-width: 768px) {
   .vn-wa {
     bottom: 20px;
     right: 20px;
-    padding: 10px 14px;
-    gap: 8px;
-  }
-  
-  .vn-wa-label {
+    padding: 12px 18px;
+    gap: 10px;
     font-size: 0.9rem;
   }
+  
+  .vn-wa-icon {
+    width: 42px;
+    height: 42px;
+  }
 }
-
   /* ANIMATIONS */
   @keyframes fadeInUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
   @keyframes fadeInRight{from{opacity:0;transform:translateX(36px)}to{opacity:1;transform:translateX(0)}}
   @keyframes pulse-ring{0%,100%{transform:scale(1);opacity:0.55}50%{transform:scale(1.05);opacity:1}}
-
-  /* RESPONSIVE */
-  @media(max-width:768px){
-    .vn-hero-in{grid-template-columns:1fr;text-align:center;}
-    .vn-hero-btns{justify-content:center;}
-    .vn-visual{display:none;}
-    .vn-why-grid{grid-template-columns:1fr;}
-    .vn-proc-grid{grid-template-columns:1fr 1fr;}
-    .vn-proc-grid::before{display:none;}
-    .vn-nav-links{display:none;}
-    .vn-stat{padding:0.5rem 1.2rem;}
-    .vn-ggrid{grid-template-columns:1fr 1fr;}
-    .vn-gi{grid-column:span 1!important;grid-row:span 1!important;}
-    .vn-lbprev{left:-8px;}
-    .vn-lbnext{right:-8px;}
-    .vn-trust{gap:0.8rem;}
-    .vn-hdpe-feats{flex-direction:column;align-items:center;}
-  }
 `;
