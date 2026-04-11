@@ -9,7 +9,7 @@ export default function Process() {
         <div className="vn-proc-hd">
           <span className="vn-lbl">Our 5-Step Process</span>
           <h2 className="vn-ttl">From Consultation to Full Water Utilization</h2>
-          <p className="vn-sub">Our proven process takes you from initial site visit to a fully operational, productive water pan — stress-free, professional, and on time.</p>
+          <p className="vn-sub">Our proven process takes you from initial site visit to a fully operational, productive water pan — stress-free and on time.</p>
         </div>
         <div className="vn-proc-grid">
           {PROCESS_STEPS.map(s => (

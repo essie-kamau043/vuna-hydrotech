@@ -1,7 +1,9 @@
 // src/components/Navbar.jsx
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <nav className="vn-nav">
       <div className="vn-logo">
@@ -11,13 +13,23 @@ export default function Navbar() {
         </div>
       </div>
 
-      <ul className="vn-nav-links">
-        {[["#services","Services"],["#why","Why Us"],["#process","Process"],["#gallery","Gallery"],["#contact","Contact"]].map(([h,l]) => (
-          <li key={h}><a href={h}>{l}</a></li>
+      <a href="tel:0701036336" className="vn-nav-cta">📞 0701 036 336</a>
+
+      <button className="vn-hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+        {menuOpen ? '✕' : '☰'}
+      </button>
+
+      <ul className={`vn-nav-links ${menuOpen ? 'open' : ''}`}>
+        {[
+          ["#services", "Services"],
+          ["#why", "Why Us"],
+          ["#process", "Process"],
+          ["#gallery", "Gallery"],
+          ["#contact", "Contact"]
+        ].map(([h, l]) => (
+          <li key={h}><a href={h} onClick={() => setMenuOpen(false)}>{l}</a></li>
         ))}
       </ul>
-
-      <a href="tel:0701036336" className="vn-nav-cta">📞 0701 036 336</a>
     </nav>
   );
 }

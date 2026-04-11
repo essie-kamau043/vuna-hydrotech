@@ -13,8 +13,6 @@ export const GLOBAL_STYLES = `
   body{font-family:'DM Sans',sans-serif;background:var(--w);color:var(--td);overflow-x:hidden;}
 
   /* ==================== ORIGINAL STYLES ==================== */
-
-  /* NAV */
   .vn-nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(10,61,98,0.97);backdrop-filter:blur(12px);padding:0.85rem 2rem;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid rgba(79,195,247,0.25);}
   .vn-logo{display:flex;align-items:center;cursor:pointer;background:none;border:none;gap:0.6rem;}
   .vn-logo-txt{color:#fff;font-family:'Fraunces',serif;font-size:1.2rem;font-weight:700;line-height:1.1;text-align:left;}
@@ -26,11 +24,9 @@ export const GLOBAL_STYLES = `
   .vn-nav-cta{background:var(--gm);color:#fff;padding:0.5rem 1.4rem;border-radius:50px;font-weight:700;font-size:0.88rem;transition:background 0.2s,transform 0.2s;border:none;cursor:pointer;text-decoration:none;}
   .vn-nav-cta:hover{background:var(--gb);transform:translateY(-1px);}
 
-  /* TRUST BAR */
   .vn-trust{background:var(--gd);padding:0.52rem 2rem;display:flex;justify-content:center;align-items:center;gap:2rem;flex-wrap:wrap;}
   .vn-trust span{color:rgba(255,255,255,0.88);font-size:0.78rem;font-weight:600;letter-spacing:0.3px;}
 
-  /* HERO */
   .vn-hero{min-height:100vh;background:radial-gradient(ellipse at 15% 60%,rgba(26,111,168,0.3) 0%,transparent 55%),radial-gradient(ellipse at 85% 15%,rgba(46,125,50,0.25) 0%,transparent 50%),linear-gradient(160deg,#040f1a 0%,#0a3d62 45%,#0d4f3c 100%);display:flex;align-items:center;padding:6rem 2rem 4rem;position:relative;overflow:hidden;}
   .vn-hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(79,195,247,0.07) 1px,transparent 0);background-size:40px 40px;}
   .vn-hero-in{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.1fr 0.9fr;gap:4rem;align-items:center;position:relative;z-index:1;width:100%;}
@@ -47,7 +43,6 @@ export const GLOBAL_STYLES = `
   .vn-btn-s{background:rgba(255,255,255,0.08);color:#fff;border:1.5px solid rgba(255,255,255,0.3);padding:0.85rem 2.2rem;border-radius:50px;font-weight:500;font-size:1rem;transition:background 0.2s,border-color 0.2s;cursor:pointer;text-decoration:none;}
   .vn-btn-s:hover{background:rgba(255,255,255,0.15);border-color:rgba(255,255,255,0.6);}
 
-  /* DROP VISUAL */
   .vn-visual{display:flex;justify-content:center;align-items:center;animation:fadeInRight 0.8s 0.2s ease both;}
   .vn-drop{position:relative;width:300px;height:360px;}
   .vn-ring{position:absolute;inset:-20px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;border:2px solid rgba(79,195,247,0.2);animation:pulse-ring 3s ease-in-out infinite;}
@@ -55,24 +50,20 @@ export const GLOBAL_STYLES = `
   .vn-ring:nth-child(3){inset:-60px;animation-delay:2s;border-color:rgba(79,195,247,0.1);}
   .vn-dropsvg{width:100%;height:100%;filter:drop-shadow(0 20px 60px rgba(26,111,168,0.5));}
 
-  /* STATS */
   .vn-stats{background:var(--bd);padding:1.8rem 2rem;display:flex;justify-content:center;flex-wrap:wrap;border-bottom:3px solid var(--gm);}
   .vn-stat{text-align:center;padding:0.5rem 2.5rem;border-right:1px solid rgba(255,255,255,0.1);}
   .vn-stat:last-child{border-right:none;}
   .vn-sn{font-family:'Fraunces',serif;font-size:2.2rem;font-weight:900;color:var(--bl);display:block;}
   .vn-sl{color:rgba(255,255,255,0.7);font-size:0.82rem;font-weight:500;}
 
-  /* SECTION BASE */
   .vn-sec{padding:5rem 2rem;}
   .vn-con{max-width:1200px;margin:0 auto;}
   .vn-lbl{display:inline-block;color:var(--gm);font-size:0.76rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:0.6rem;}
   .vn-ttl{font-family:'Fraunces',serif;font-size:clamp(1.85rem,3.2vw,2.8rem);font-weight:800;color:var(--td);line-height:1.15;margin-bottom:1rem;}
   .vn-sub{color:var(--tm);font-size:1rem;line-height:1.72;max-width:600px;}
 
-  /* SERVICES */
   .vn-svc-bg{background:var(--ow);}
   .vn-svc-hd{text-align:center;margin-bottom:3rem;}
-  .vn-svc-hd .vn-sub{margin:0 auto;}
   .vn-svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
   .vn-card{background:#fff;border-radius:20px;padding:2rem;position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.06);border:1px solid rgba(0,0,0,0.04);transition:transform 0.3s,box-shadow 0.3s;}
   .vn-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(10,61,98,0.12);}
@@ -84,7 +75,6 @@ export const GLOBAL_STYLES = `
   .vn-card h3{font-family:'Fraunces',serif;font-size:1.18rem;font-weight:700;margin-bottom:0.5rem;color:var(--td);}
   .vn-card p{color:var(--tm);font-size:0.88rem;line-height:1.65;}
 
-  /* HDPE BAND */
   .vn-hdpe{background:linear-gradient(135deg,#040f1a,#0a3d62,#0d4f3c);padding:3.5rem 2rem;text-align:center;position:relative;overflow:hidden;}
   .vn-hdpe::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(255,255,255,0.05) 1px,transparent 0);background-size:32px 32px;}
   .vn-hdpe-in{max-width:900px;margin:0 auto;position:relative;z-index:1;}
@@ -94,7 +84,6 @@ export const GLOBAL_STYLES = `
   .vn-hdpe-feats{display:flex;justify-content:center;gap:1.8rem;flex-wrap:wrap;margin-bottom:2rem;}
   .vn-hdpe-f{display:flex;align-items:center;gap:0.5rem;color:var(--gl);font-weight:600;font-size:0.9rem;}
 
-  /* WHY */
   .vn-why{background:linear-gradient(160deg,var(--bd) 0%,#0a2e1e 100%);color:#fff;position:relative;overflow:hidden;}
   .vn-why::before{content:'';position:absolute;right:-200px;top:-100px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(76,175,80,0.12) 0%,transparent 70%);}
   .vn-why .vn-ttl{color:#fff;}
@@ -112,10 +101,8 @@ export const GLOBAL_STYLES = `
   .vn-cs strong{display:block;font-size:0.9rem;color:#fff;}
   .vn-cs small{color:rgba(255,255,255,0.5);font-size:0.78rem;}
 
-  /* PROCESS */
   .vn-proc-bg{background:#fff;}
   .vn-proc-hd{text-align:center;margin-bottom:3.5rem;}
-  .vn-proc-hd .vn-sub{margin:0 auto;}
   .vn-proc-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;position:relative;}
   .vn-proc-grid::before{content:'';position:absolute;top:36px;left:10%;right:10%;height:2px;background:linear-gradient(90deg,var(--bm),var(--gm));z-index:0;}
   .vn-ps{text-align:center;padding:0 0.6rem;position:relative;z-index:1;}
@@ -123,10 +110,8 @@ export const GLOBAL_STYLES = `
   .vn-ps h4{font-weight:700;margin-bottom:0.35rem;font-size:0.92rem;color:var(--td);}
   .vn-ps p{font-size:0.8rem;color:var(--tm);line-height:1.5;}
 
-  /* GALLERY */
   .vn-gal-bg{background:var(--ow);}
   .vn-gal-hd{text-align:center;margin-bottom:1.5rem;}
-  .vn-gal-hd .vn-sub{margin:0 auto 2rem;}
   .vn-gtabs{display:flex;justify-content:center;gap:0.6rem;flex-wrap:wrap;margin-bottom:2.5rem;}
   .vn-gtab{padding:0.5rem 1.4rem;border-radius:50px;border:2px solid var(--bm);background:transparent;color:var(--bm);font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:600;cursor:pointer;transition:all 0.2s;}
   .vn-gtab.active,.vn-gtab:hover{background:var(--bd);color:#fff;border-color:var(--bd);}
@@ -151,7 +136,6 @@ export const GLOBAL_STYLES = `
   .vn-upbanner{background:linear-gradient(135deg,rgba(26,111,168,0.1),rgba(46,125,50,0.1));border:2px dashed rgba(26,111,168,0.3);border-radius:16px;padding:1.5rem;text-align:center;margin-top:2rem;}
   .vn-upbanner p{color:var(--tm);font-size:0.88rem;}
 
-  /* LIGHTBOX */
   .vn-lb{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.93);display:flex;align-items:center;justify-content:center;padding:2rem;}
   .vn-lbi{position:relative;max-width:700px;width:100%;}
   .vn-lbc{min-height:300px;background:#0d1b2a;border-radius:16px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1rem;border:1px solid rgba(79,195,247,0.1);}
@@ -163,7 +147,6 @@ export const GLOBAL_STYLES = `
   .vn-lbprev{left:-60px;}
   .vn-lbnext{right:-60px;}
 
-  /* CONTACT */
   .vn-ctc{background:linear-gradient(135deg,#0a3d62 0%,#1b5e20 100%);color:#fff;text-align:center;}
   .vn-ctc .vn-ttl{color:#fff;}
   .vn-ctc .vn-sub{color:rgba(255,255,255,0.72);margin:0 auto 3rem;}
@@ -189,240 +172,156 @@ export const GLOBAL_STYLES = `
   .vn-tip p{font-size:0.87rem;color:rgba(255,255,255,0.8);line-height:1.6;}
   .vn-toast{background:rgba(76,175,80,0.18);border:1px solid rgba(76,175,80,0.45);border-radius:12px;padding:1rem 1.5rem;margin-bottom:1.5rem;color:#a5d6a7;font-weight:600;text-align:left;}
 
-  /* FOOTER */
   .vn-footer{background:#030c14;color:rgba(255,255,255,0.45);padding:2rem;text-align:center;font-size:0.82rem;}
   .vn-footer strong{color:var(--bl);}
   .vn-fphone{color:var(--gl);font-size:1rem;font-weight:700;display:block;margin-bottom:0.4rem;text-decoration:none;}
 
-  /* ==================== IMPROVED MOBILE RESPONSIVENESS ==================== */
+  /* ==================== IMPROVED MOBILE + NEW FEATURES ==================== */
 
-  /* Mobile Nav */
+  /* Mobile Nav + Hamburger */
   .vn-nav {
     padding: 1rem 1.2rem;
     flex-direction: column;
     gap: 12px;
+    align-items: center;
   }
 
-  .vn-nav-links {
+  .vn-hamburger {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.8rem;
+    cursor: pointer;
     display: none;
+  }
+
+  @media (max-width: 768px) {
+    .vn-hamburger { display: block; }
+    .vn-nav-links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: rgba(10,61,98,0.98);
+      padding: 1rem 0;
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+    }
+    .vn-nav-links.open { display: flex; }
   }
 
   @media (min-width: 769px) {
-    .vn-nav {
-      flex-direction: row;
-      padding: 0.85rem 2rem;
-    }
-    .vn-nav-links {
-      display: flex;
-    }
+    .vn-nav { flex-direction: row; padding: 0.85rem 2rem; }
+    .vn-nav-links { display: flex; }
   }
 
-  /* Hero Mobile */
-  .vn-hero {
-    padding: 5.5rem 1.2rem 4rem;
-    min-height: auto;
-  }
+  /* Hero Improvements */
+  .vn-hero { padding: 5.5rem 1.2rem 5rem; min-height: auto; }
+  .vn-hero-in { grid-template-columns: 1fr; text-align: center; gap: 2.5rem; }
+  .vn-hero p { font-size: 1rem; line-height: 1.65; max-width: 100%; }
+  .vn-hero-btns { justify-content: center; gap: 1rem; flex-direction: column; max-width: 320px; margin: 0 auto; }
+  .vn-btn-p, .vn-btn-s { width: 100%; padding: 0.95rem 2rem; }
 
-  .vn-hero-in {
-    grid-template-columns: 1fr;
-    text-align: center;
-    gap: 2.5rem;
-  }
+  /* General Spacing & Sections */
+  .vn-sec { padding: 4.8rem 1.2rem 100px; } /* extra bottom padding for WhatsApp */
+  .vn-con { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
 
-  .vn-hero p {
-    font-size: 1rem;
-    max-width: 100%;
-    line-height: 1.65;
-  }
+  .vn-proc-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .vn-proc-grid::before { display: none; }
+  .vn-ggrid { grid-template-columns: 1fr; gap: 16px; }
+  .vn-ctc-grid { grid-template-columns: 1fr; gap: 2rem; }
 
-  .vn-phone-link {
-    font-size: 1.1rem;
-    padding: 0.7rem 1.6rem;
-    margin-bottom: 1.5rem;
-  }
+  .vn-ttl { margin-bottom: 1.2rem; line-height: 1.1; }
+  .vn-sub { margin-bottom: 2.5rem; }
 
-  .vn-hero-btns {
-    justify-content: center;
-    gap: 1rem;
-  }
+  /* Enhanced Drop Visual */
+  .vn-drop { filter: drop-shadow(0 25px 50px rgba(26,111,168,0.6)); }
 
-  .vn-btn-p, .vn-btn-s {
-    width: 100%;
-    max-width: 280px;
-    padding: 0.9rem 2rem;
-  }
-
-  /* General Section Spacing */
-  .vn-sec {
-    padding: 4.5rem 1.2rem;
-  }
-
-  .vn-con {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  /* Process */
-  .vn-proc-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  .vn-proc-grid::before {
-    display: none;
-  }
-
-  /* Gallery */
-  .vn-ggrid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  /* Contact */
-  .vn-ctc-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  .vn-fcard, .vn-icard {
-    padding: 1.8rem;
-  }
-
-  /* Typography */
-  .vn-ttl {
-    margin-bottom: 1.2rem;
-    line-height: 1.1;
-  }
-
-  .vn-sub {
-    margin-bottom: 2.5rem;
-  }
-
-  /* WhatsApp Button */
+  /* Realistic Icon-Only WhatsApp Button */
   .vn-wa {
-    bottom: 20px;
-    right: 15px;
-    padding: 10px 16px;
-    gap: 8px;
-    font-size: 0.92rem;
-    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.35);
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 9999;
+    width: 68px;
+    height: 68px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.55);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .vn-wa:hover {
-    transform: translateY(-3px);
+    transform: scale(1.15) translateY(-4px);
+    box-shadow: 0 15px 40px rgba(37, 211, 102, 0.65);
+  }
+
+  .vn-wa-icon {
+    position: relative;
+    width: 58px;
+    height: 58px;
+    background: rgba(255,255,255,0.22);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .vn-wa-pulse {
+    position: absolute;
+    inset: -12px;
+    background: #25D366;
+    border-radius: 50%;
+    animation: wa-pulse 2.6s ease-in-out infinite;
+    opacity: 0.28;
+    z-index: -1;
+  }
+
+  @keyframes wa-pulse {
+    0%, 100% { transform: scale(0.75); opacity: 0.35; }
+    50% { transform: scale(1.4); opacity: 0; }
+  }
+
+  /* Back to Top */
+  .vn-back-to-top {
+    position: fixed;
+    bottom: 110px;
+    right: 25px;
+    z-index: 9998;
+    width: 48px;
+    height: 48px;
+    background: #0a3d62;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.4rem;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(10,61,98,0.4);
+    transition: all 0.3s ease;
+  }
+
+  .vn-back-to-top:hover {
+    background: #1a6fa8;
+    transform: scale(1.1);
   }
 
   /* Final Mobile Tweaks */
   @media (max-width: 768px) {
-    .vn-hero h1 {
-      font-size: clamp(2.1rem, 7vw, 2.8rem);
-    }
-    
-    .vn-stat {
-      padding: 0.8rem 1rem;
-      border-right: none;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-    
-    .vn-stat:last-child {
-      border-bottom: none;
-    }
-    
-    .vn-svc-grid {
-      grid-template-columns: 1fr;
-    }
-    
-    .vn-why-grid {
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
-    }
-
-    .vn-gi {
-      height: 220px;
-    }
+    .vn-hero h1 { font-size: clamp(2.1rem, 7vw, 2.8rem); }
+    .vn-stat { padding: 0.8rem 1rem; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .vn-stat:last-child { border-bottom: none; }
+    .vn-svc-grid { grid-template-columns: 1fr; }
+    .vn-why-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .vn-wa { width: 60px; height: 60px; bottom: 20px; right: 20px; }
+    .vn-wa-icon { width: 50px; height: 50px; }
+    .vn-back-to-top { bottom: 95px; right: 20px; width: 44px; height: 44px; }
   }
-    /* Enhanced Drop Visual */
-.vn-drop {
-  filter: drop-shadow(0 25px 50px rgba(26,111,168,0.6));
-}
 
-.vn-dropsvg {
-  width: 100%;
-  height: 100%;
-}
-
-
-/* IMPROVED WHATSAPP FLOATING BUTTON */
-.vn-wa {
-  position: fixed;
-  bottom: 25px;
-  right: 25px;
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: #25d366;
-  color: white;
-  padding: 14px 20px;
-  border-radius: 50px;
-  text-decoration: none;
-  font-weight: 600;
-  box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
-  transition: all 0.3s ease;
-  font-size: 0.95rem;
-}
-
-.vn-wa:hover {
-  transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 15px 40px rgba(37, 211, 102, 0.5);
-}
-
-.vn-wa-icon {
-  width: 48px;
-  height: 48px;
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(4px);
-}
-
-.vn-wa-label {
-  white-space: nowrap;
-}
-
-.vn-wa-pulse {
-  position: absolute;
-  inset: -12px;
-  background: #25d366;
-  border-radius: 50%;
-  animation: wa-pulse 2.5s ease-in-out infinite;
-  opacity: 0.25;
-  z-index: -1;
-}
-
-/* Pulse Animation */
-@keyframes wa-pulse {
-  0%, 100% { transform: scale(0.6); opacity: 0.3; }
-  50% { transform: scale(1.4); opacity: 0; }
-}
-
-/* Mobile adjustments */
-@media (max-width: 768px) {
-  .vn-wa {
-    bottom: 20px;
-    right: 20px;
-    padding: 12px 18px;
-    gap: 10px;
-    font-size: 0.9rem;
-  }
-  
-  .vn-wa-icon {
-    width: 42px;
-    height: 42px;
-  }
-}
   /* ANIMATIONS */
   @keyframes fadeInUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
   @keyframes fadeInRight{from{opacity:0;transform:translateX(36px)}to{opacity:1;transform:translateX(0)}}

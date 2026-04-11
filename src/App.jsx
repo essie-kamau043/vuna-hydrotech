@@ -14,9 +14,10 @@ import Gallery from './components/Gallery';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
+import BackToTop from './components/BackToTop';
 
 export default function App() {
-  // Smooth scrolling for anchor links
+  // Smooth scrolling for all anchor links
   useEffect(() => {
     const handleAnchorClick = (e) => {
       const target = e.target.closest('a[href^="#"]');
@@ -51,6 +52,7 @@ export default function App() {
       <Footer />
 
       <WhatsAppButton />
+      <BackToTop />
     </>
   );
 }
