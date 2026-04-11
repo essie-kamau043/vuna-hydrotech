@@ -6,7 +6,7 @@ export default function Hero() {
     <section className="vn-hero" id="home">
       <div className="vn-hero-in">
         <div>
-          <div className="vn-kicker">🇰🇪 Proudly Kenyan · Serving All 47 Counties</div>
+          <div className="vn-kicker">🇰🇪Serving All 47 Counties</div>
           
           <h1>Built to Hold Water.<br/><em>Built to Transform Lives.</em></h1>
           
