@@ -6,6 +6,7 @@ export default function Navbar() {
 
   return (
     <nav className="vn-nav">
+      {/* Logo - always on the left */}
       <div className="vn-logo">
         <div className="vn-logo-txt">
           VUNA <span>HYDROTECH</span> (K) LTD
@@ -13,12 +14,19 @@ export default function Navbar() {
         </div>
       </div>
 
+      {/* Phone CTA - hidden on very small screens, shown on tablet+ */}
       <a href="tel:0701036336" className="vn-nav-cta">📞 0701 036 336</a>
 
-      <button className="vn-hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+      {/* Hamburger - on the right side */}
+      <button 
+        className="vn-hamburger" 
+        onClick={() => setMenuOpen(!menuOpen)}
+        aria-label="Toggle menu"
+      >
         {menuOpen ? '✕' : '☰'}
       </button>
 
+      {/* Menu Links */}
       <ul className={`vn-nav-links ${menuOpen ? 'open' : ''}`}>
         {[
           ["#services", "Services"],
@@ -27,7 +35,9 @@ export default function Navbar() {
           ["#gallery", "Gallery"],
           ["#contact", "Contact"]
         ].map(([h, l]) => (
-          <li key={h}><a href={h} onClick={() => setMenuOpen(false)}>{l}</a></li>
+          <li key={h}>
+            <a href={h} onClick={() => setMenuOpen(false)}>{l}</a>
+          </li>
         ))}
       </ul>
     </nav>

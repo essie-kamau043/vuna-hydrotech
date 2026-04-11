@@ -178,44 +178,79 @@ export const GLOBAL_STYLES = `
 
   /* ==================== IMPROVED MOBILE + NEW FEATURES ==================== */
 
-  /* Mobile Nav + Hamburger */
-  .vn-nav {
-    padding: 1rem 1.2rem;
-    flex-direction: column;
-    gap: 12px;
-    align-items: center;
-  }
+  /* NAV - IMPROVED WITH HAMBURGER ON RIGHT */
+.vn-nav {
+  padding: 1rem 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
 
+.vn-logo {
+  flex: 1;
+}
+
+.vn-nav-cta {
+  display: none; /* Hide on mobile, show on larger screens */
+}
+
+.vn-hamburger {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
+  padding: 8px;
+  display: block;
+  z-index: 10;
+}
+
+.vn-nav-links {
+  display: none;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  text-align: center;
+  background: rgba(10,61,98,0.98);
+  padding: 1rem 0;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.vn-nav-links.open {
+  display: flex;
+}
+
+/* Desktop / Tablet */
+@media (min-width: 769px) {
+  .vn-nav {
+    flex-wrap: nowrap;
+    padding: 0.85rem 2rem;
+  }
+  
+  .vn-nav-cta {
+    display: block;
+  }
+  
   .vn-hamburger {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.8rem;
-    cursor: pointer;
     display: none;
   }
-
-  @media (max-width: 768px) {
-    .vn-hamburger { display: block; }
-    .vn-nav-links {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      width: 100%;
-      background: rgba(10,61,98,0.98);
-      padding: 1rem 0;
-      flex-direction: column;
-      gap: 1rem;
-      text-align: center;
-    }
-    .vn-nav-links.open { display: flex; }
+  
+  .vn-nav-links {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    position: static;
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+    width: auto;
   }
-
-  @media (min-width: 769px) {
-    .vn-nav { flex-direction: row; padding: 0.85rem 2rem; }
-    .vn-nav-links { display: flex; }
-  }
+}
 
   /* Hero Improvements */
   .vn-hero { padding: 5.5rem 1.2rem 5rem; min-height: auto; }
