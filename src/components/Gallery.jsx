@@ -8,8 +8,8 @@ function Thumb({ item }) {
 
   if (showPlaceholder) {
     return (
-      <div className="vn-gph" style={{ background: item.bg, minHeight: 200, height: "100%" }}>
-        <span>{item.icon}</span>
+      <div className="vn-gph" style={{ background: item.bg || "#0d2137", minHeight: 220 }}>
+        <span style={{ fontSize: "3.2rem" }}>{item.icon}</span>
         <p>{item.label}</p>
       </div>
     );
@@ -21,7 +21,14 @@ function Thumb({ item }) {
       alt={item.caption}
       onError={() => setErrored(true)}
       loading="lazy"
-      style={{ width: "100%", height: "100%", minHeight: 200, objectFit: "cover", display: "block" }}
+      style={{
+        width: "100%",
+        height: "100%",
+        minHeight: 220,
+        objectFit: "cover",
+        display: "block",
+        transition: "transform 0.4s ease"
+      }}
     />
   );
 }
@@ -34,13 +41,19 @@ function LightboxImage({ item }) {
   if (showPlaceholder) {
     return (
       <div style={{
-        display: "flex", flexDirection: "column", alignItems: "center",
-        justifyContent: "center", gap: "0.75rem", minHeight: 220,
-        background: item.bg, borderRadius: 12,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: 280,
+        background: item.bg || "#0d1b2a",
+        padding: "2rem 1rem",
+        textAlign: "center",
+        borderRadius: "12px",
       }}>
-        <span style={{ fontSize: "4rem" }}>{item.icon}</span>
-        <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.78rem", margin: 0, textAlign: "center", padding: "0 1rem" }}>
-          Add your photo URL in data.js to display a real image here
+        <span style={{ fontSize: "4.5rem", marginBottom: "1rem" }}>{item.icon}</span>
+        <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "0.9rem", maxWidth: "280px" }}>
+          Add your photo URL in <strong>data.js</strong> to display the real image here
         </p>
       </div>
     );
@@ -52,7 +65,13 @@ function LightboxImage({ item }) {
       alt={item.caption}
       onError={() => setErrored(true)}
       loading="lazy"
-      style={{ width: "100%", maxHeight: "60vh", objectFit: "contain", borderRadius: 12, display: "block" }}
+      style={{
+        width: "100%",
+        maxHeight: "72vh",
+        objectFit: "contain",
+        borderRadius: "12px",
+        display: "block",
+      }}
     />
   );
 }
@@ -67,15 +86,12 @@ export default function Gallery() {
   const next = useCallback(() => setLbIdx((i) => (i + 1) % visible.length), [visible.length]);
   const prev = useCallback(() => setLbIdx((i) => (i - 1 + visible.length) % visible.length), [visible.length]);
 
-  const onKey = useCallback(
-    (e) => {
-      if (lbIdx === null) return;
-      if (e.key === "ArrowRight") next();
-      if (e.key === "ArrowLeft") prev();
-      if (e.key === "Escape") close();
-    },
-    [lbIdx, next, prev, close]
-  );
+  const onKey = useCallback((e) => {
+    if (lbIdx === null) return;
+    if (e.key === "ArrowRight") next();
+    if (e.key === "ArrowLeft") prev();
+    if (e.key === "Escape") close();
+  }, [lbIdx, next, prev, close]);
 
   useEffect(() => {
     document.addEventListener("keydown", onKey);
@@ -87,17 +103,20 @@ export default function Gallery() {
     return () => { document.body.style.overflow = ""; };
   }, [lbIdx]);
 
+  // Scroll animations
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("visible"); }),
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+      (entries) => entries.forEach((e) => {
+        if (e.isIntersecting) e.target.classList.add("visible");
+      }),
+      { threshold: 0.15, rootMargin: "0px 0px -50px 0px" }
     );
 
-    document.querySelectorAll(".vn-sec").forEach((s) => observer.observe(s));
+    document.querySelectorAll(".vn-sec").forEach(s => observer.observe(s));
 
     const cards = document.querySelectorAll(".vn-gi");
-    cards.forEach((card, index) => {
-      setTimeout(() => observer.observe(card), index * 60);
+    cards.forEach((card, i) => {
+      setTimeout(() => observer.observe(card), i * 80);
     });
 
     return () => observer.disconnect();
@@ -118,8 +137,11 @@ export default function Gallery() {
           {GALLERY_TABS.map((t) => (
             <button
               key={t.key}
-              className={`vn-gtab${filter === t.key ? " active" : ""}`}
-              onClick={() => { setFilter(t.key); setLbIdx(null); }}
+              className={`vn-gtab ${filter === t.key ? "active" : ""}`}
+              onClick={() => {
+                setFilter(t.key);
+                setLbIdx(null);
+              }}
             >
               {t.label}
             </button>
@@ -137,11 +159,13 @@ export default function Gallery() {
               aria-label={`View ${item.caption}`}
               onKeyDown={(e) => e.key === "Enter" && setLbIdx(idx)}
             >
-              <Thumb item={item} />
-              <div className="vn-gov">
-                <div className="vn-gcap">
-                  {item.caption}
-                  <span>{item.sub}</span>
+              <div className="vn-gi-inner">
+                <Thumb item={item} />
+                <div className="vn-gov">
+                  <div className="vn-gcap">
+                    {item.caption}
+                    <span>{item.sub}</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -156,13 +180,14 @@ export default function Gallery() {
         </div>
       </div>
 
-      {/* Lightbox */}
+      {/* ==================== LIGHTBOX ==================== */}
       {lbIdx !== null && visible[lbIdx] && (
         <div className="vn-lb" onClick={close}>
           <div className="vn-lbi" onClick={(e) => e.stopPropagation()}>
-
-            {/* Close */}
-            <button className="vn-lbx" onClick={close} aria-label="Close">✕</button>
+            {/* Close Button */}
+            <button className="vn-lbx" onClick={close} aria-label="Close">
+              ✕
+            </button>
 
             {/* Image */}
             <div className="vn-lbc">
@@ -173,17 +198,22 @@ export default function Gallery() {
             <div className="vn-lbcap">
               <strong>{visible[lbIdx].caption}</strong> — {visible[lbIdx].sub}
               <br />
-              <span style={{ fontSize: "0.72rem", opacity: 0.45 }}>
+              <span style={{ fontSize: "0.78rem", opacity: 0.55 }}>
                 {lbIdx + 1} / {visible.length}
               </span>
             </div>
 
-            {/* Prev / Next */}
-            <div className="vn-lbnav-row">
-              <button className="vn-lbnav vn-lbprev" onClick={prev} aria-label="Previous">‹</button>
-              <button className="vn-lbnav vn-lbnext" onClick={next} aria-label="Next">›</button>
-            </div>
-
+            {/* Navigation Arrows */}
+            {visible.length > 1 && (
+              <div className="vn-lbnav-row">
+                <button className="vn-lbnav vn-lbprev" onClick={prev} aria-label="Previous">
+                  ‹
+                </button>
+                <button className="vn-lbnav vn-lbnext" onClick={next} aria-label="Next">
+                  ›
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}
