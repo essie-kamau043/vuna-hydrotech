@@ -2,69 +2,174 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { GALLERY_ITEMS, GALLERY_TABS } from "../data";
 
+// ─── Thumbnail ────────────────────────────────────────────────────────────────
+// Shows a real photo if `item.img` is set, otherwise shows the coloured placeholder.
+// Inside Thumb component
+function Thumb({ item }) {
+  const [errored, setErrored] = useState(false);
+  
+  const hasRealImage = item.img && item.img.trim() !== "";
+  const showPlaceholder = !hasRealImage || errored;
+
+  if (showPlaceholder) {
+    return (
+      <div
+        className="vn-gph"
+        style={{ 
+          background: item.bg,
+          minHeight: 200, 
+          height: "100%" 
+        }}
+      >
+        <span>{item.icon}</span>
+        <p>{item.label}</p>
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={item.img}
+      alt={item.caption}
+      onError={() => setErrored(true)}
+      loading="lazy"                    // ← Good for performance
+      style={{
+        width: "100%",
+        height: "100%",
+        minHeight: 200,
+        objectFit: "cover",
+        display: "block",
+      }}
+    />
+  );
+}
+
+// ─── LightboxImage ────────────────────────────────────────────────────────────
+// ─── LightboxImage ────────────────────────────────────────────────────────────
+function LightboxImage({ item }) {
+  const [errored, setErrored] = useState(false);
+  
+  const hasRealImage = item.img && item.img.trim() !== "";
+  const showPlaceholder = !hasRealImage || errored;
+
+  if (showPlaceholder) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "0.75rem",
+          minHeight: 300,
+          background: item.bg,
+          borderRadius: 12,
+        }}
+      >
+        <span style={{ fontSize: "5rem" }}>{item.icon}</span>
+        <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.78rem" }}>
+          Add your photo URL in data.js to display a real image here
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={item.img}
+      alt={item.caption}
+      onError={() => setErrored(true)}
+      loading="lazy"
+      style={{
+        width: "100%",
+        maxHeight: "70vh",
+        objectFit: "contain",
+        borderRadius: 12,
+        display: "block",
+      }}
+    />
+  );
+}
+
+// ─── Gallery ──────────────────────────────────────────────────────────────────
 export default function Gallery() {
   const [filter, setFilter] = useState("all");
   const [lbIdx, setLbIdx] = useState(null);
 
-  const visible = GALLERY_ITEMS.filter(i => filter === "all" || i.cat === filter);
+  const visible = GALLERY_ITEMS.filter(
+    (i) => filter === "all" || i.cat === filter
+  );
 
-  // Memoized handlers so they don't change unnecessarily
   const close = useCallback(() => setLbIdx(null), []);
 
   const next = useCallback(() => {
-    setLbIdx(i => (i + 1) % visible.length);
+    setLbIdx((i) => (i + 1) % visible.length);
   }, [visible.length]);
 
   const prev = useCallback(() => {
-    setLbIdx(i => (i - 1 + visible.length) % visible.length);
+    setLbIdx((i) => (i - 1 + visible.length) % visible.length);
   }, [visible.length]);
 
-  // onKey now includes all dependencies it actually uses
-  const onKey = useCallback((e) => {
-    if (lbIdx === null) return;
-    if (e.key === "ArrowRight") next();
-    if (e.key === "ArrowLeft") prev();
-    if (e.key === "Escape") close();
-  }, [lbIdx, next, prev, close]);
+  const onKey = useCallback(
+    (e) => {
+      if (lbIdx === null) return;
+      if (e.key === "ArrowRight") next();
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === "Escape") close();
+    },
+    [lbIdx, next, prev, close]
+  );
 
-  // Add keyboard listener
   useEffect(() => {
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
   }, [onKey]);
 
+  // Lock body scroll when lightbox is open
+  useEffect(() => {
+    document.body.style.overflow = lbIdx !== null ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [lbIdx]);
+
   return (
     <section className="vn-sec vn-gal-bg" id="gallery">
       <div className="vn-con">
+        {/* Header */}
         <div className="vn-gal-hd">
           <span className="vn-lbl">Our Work</span>
           <h2 className="vn-ttl">Projects Gallery</h2>
-          <p className="vn-sub">Completed HDPE water pans, excavations, fencing, and farm water projects across Kenya.</p>
+          <p className="vn-sub">
+            Completed HDPE water pans, excavations, fencing, and farm water
+            projects across Kenya.
+          </p>
         </div>
 
+        {/* Tabs */}
         <div className="vn-gtabs">
-          {GALLERY_TABS.map(t => (
-            <button 
-              key={t.key} 
-              className={`vn-gtab${filter === t.key ? " active" : ""}`} 
-              onClick={() => setFilter(t.key)}
+          {GALLERY_TABS.map((t) => (
+            <button
+              key={t.key}
+              className={`vn-gtab${filter === t.key ? " active" : ""}`}
+              onClick={() => { setFilter(t.key); setLbIdx(null); }}
             >
               {t.label}
             </button>
           ))}
         </div>
 
+        {/* Grid */}
         <div className="vn-ggrid">
           {visible.map((item, idx) => (
-            <div 
-              className="vn-gi" 
-              key={item.id} 
+            <div
+              className="vn-gi"
+              key={item.id}
               onClick={() => setLbIdx(idx)}
+              role="button"
+              tabIndex={0}
+              aria-label={`View ${item.caption}`}
+              onKeyDown={(e) => e.key === "Enter" && setLbIdx(idx)}
             >
-              <div className="vn-gph" style={{ background: item.bg }}>
-                <span>{item.icon}</span>
-                <p>{item.label}</p>
-              </div>
+              <Thumb item={item} />
               <div className="vn-gov">
                 <div className="vn-gcap">
                   {item.caption}
@@ -75,31 +180,48 @@ export default function Gallery() {
           ))}
         </div>
 
+        {/* Upload prompt */}
         <div className="vn-upbanner">
           <p>
-            📸 <strong>Add your project photos!</strong> WhatsApp your images to{" "}
-            <strong>0701036336</strong> and we'll update the gallery with your real installations.
+            📸 <strong>Add your project photos!</strong> WhatsApp your images
+            to <strong>0701036336</strong> and we'll update the gallery with
+            your real installations.
           </p>
         </div>
       </div>
 
-      {/* Lightbox */}
-      {lbIdx !== null && (
+      {/* ── Lightbox ── */}
+      {lbIdx !== null && visible[lbIdx] && (
         <div className="vn-lb" onClick={close}>
-          <div className="vn-lbi" onClick={e => e.stopPropagation()}>
-            <button className="vn-lbx" onClick={close}>✕</button>
-            <button className="vn-lbnav vn-lbprev" onClick={prev}>‹</button>
-            <button className="vn-lbnav vn-lbnext" onClick={next}>›</button>
+          <div className="vn-lbi" onClick={(e) => e.stopPropagation()}>
+            <button className="vn-lbx" onClick={close} aria-label="Close">
+              ✕
+            </button>
+            <button
+              className="vn-lbnav vn-lbprev"
+              onClick={prev}
+              aria-label="Previous"
+            >
+              ‹
+            </button>
+            <button
+              className="vn-lbnav vn-lbnext"
+              onClick={next}
+              aria-label="Next"
+            >
+              ›
+            </button>
 
-            <div className="vn-lbc">
-              <span style={{ fontSize: "5rem" }}>{visible[lbIdx]?.icon}</span>
-              <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.78rem" }}>
-                Placeholder — replace with real photo
-              </p>
+            <div className="vn-lbc" style={{ padding: "1rem" }}>
+              <LightboxImage item={visible[lbIdx]} />
             </div>
 
             <div className="vn-lbcap">
-              {visible[lbIdx]?.caption} — {visible[lbIdx]?.sub}
+              <strong>{visible[lbIdx].caption}</strong> — {visible[lbIdx].sub}
+              <br />
+              <span style={{ fontSize: "0.72rem", opacity: 0.5 }}>
+                {lbIdx + 1} / {visible.length}
+              </span>
             </div>
           </div>
         </div>
