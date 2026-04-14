@@ -3,7 +3,7 @@ import React from 'react';
 
 export default function Hero() {
   return (
-    <section className="vn-hero" id="home">
+    <section className="vn-sec vn-hero" id="home">
       <div className="vn-hero-in">
         <div>
           <div className="vn-kicker">🇰🇪Serving All 47 Counties</div>

@@ -356,7 +356,43 @@ export const GLOBAL_STYLES = `
     .vn-wa-icon { width: 50px; height: 50px; }
     .vn-back-to-top { bottom: 95px; right: 20px; width: 44px; height: 44px; }
   }
+/* Scroll Reveal for all sections */
+.vn-sec {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.9s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
 
+.vn-sec.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Gallery cards stagger */
+.vn-ggrid .vn-gi {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.vn-ggrid .vn-gi.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Optional: Improve hover + tap feel */
+.vn-gi {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.vn-gi:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+.vn-gi:active {
+  transform: scale(0.97);
+}
   /* ANIMATIONS */
   @keyframes fadeInUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
   @keyframes fadeInRight{from{opacity:0;transform:translateX(36px)}to{opacity:1;transform:translateX(0)}}

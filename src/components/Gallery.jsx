@@ -1,10 +1,7 @@
-// src/components/Gallery.jsx
 import React, { useState, useEffect, useCallback } from "react";
 import { GALLERY_ITEMS, GALLERY_TABS } from "../data";
 
 // ─── Thumbnail ────────────────────────────────────────────────────────────────
-// Shows a real photo if `item.img` is set, otherwise shows the coloured placeholder.
-// Inside Thumb component
 function Thumb({ item }) {
   const [errored, setErrored] = useState(false);
   
@@ -32,7 +29,7 @@ function Thumb({ item }) {
       src={item.img}
       alt={item.caption}
       onError={() => setErrored(true)}
-      loading="lazy"                    // ← Good for performance
+      loading="lazy"
       style={{
         width: "100%",
         height: "100%",
@@ -44,7 +41,6 @@ function Thumb({ item }) {
   );
 }
 
-// ─── LightboxImage ────────────────────────────────────────────────────────────
 // ─── LightboxImage ────────────────────────────────────────────────────────────
 function LightboxImage({ item }) {
   const [errored, setErrored] = useState(false);
@@ -131,8 +127,40 @@ export default function Gallery() {
     return () => { document.body.style.overflow = ""; };
   }, [lbIdx]);
 
+  // ─── Scroll Reveal Effect for ALL sections ───────────────────────────────
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      { 
+        threshold: 0.12,     // Trigger when ~12% of the section is visible
+        rootMargin: "0px 0px -40px 0px"
+      }
+    );
+
+    // Observe all main sections
+    document.querySelectorAll(".vn-sec").forEach((section) => {
+      observer.observe(section);
+    });
+
+    // Staggered animation for gallery cards
+    const cards = document.querySelectorAll(".vn-gi");
+    cards.forEach((card, index) => {
+      setTimeout(() => {
+        observer.observe(card);
+      }, index * 60); // nice stagger delay
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="vn-sec vn-gal-bg" id="gallery">
+    <section className="vn-sec vn-gal-bg" id="gallery">   {/* ← Added vn-sec here */}
       <div className="vn-con">
         {/* Header */}
         <div className="vn-gal-hd">
@@ -157,7 +185,7 @@ export default function Gallery() {
           ))}
         </div>
 
-        {/* Grid */}
+        {/* Grid - Cards will stagger in */}
         <div className="vn-ggrid">
           {visible.map((item, idx) => (
             <div
@@ -190,25 +218,17 @@ export default function Gallery() {
         </div>
       </div>
 
-      {/* ── Lightbox ── */}
+      {/* Lightbox */}
       {lbIdx !== null && visible[lbIdx] && (
         <div className="vn-lb" onClick={close}>
           <div className="vn-lbi" onClick={(e) => e.stopPropagation()}>
             <button className="vn-lbx" onClick={close} aria-label="Close">
               ✕
             </button>
-            <button
-              className="vn-lbnav vn-lbprev"
-              onClick={prev}
-              aria-label="Previous"
-            >
+            <button className="vn-lbnav vn-lbprev" onClick={prev} aria-label="Previous">
               ‹
             </button>
-            <button
-              className="vn-lbnav vn-lbnext"
-              onClick={next}
-              aria-label="Next"
-            >
+            <button className="vn-lbnav vn-lbnext" onClick={next} aria-label="Next">
               ›
             </button>
 
