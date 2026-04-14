@@ -382,16 +382,32 @@ export const GLOBAL_STYLES = `
 
 /* Optional: Improve hover + tap feel */
 .vn-gi {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  background: #fff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
+/* Hover effect for desktop */
 .vn-gi:hover {
   transform: translateY(-8px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 }
 
+/* Active/tap effect for mobile & tablets */
 .vn-gi:active {
-  transform: scale(0.97);
+  transform: scale(0.96);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Make sure Thumb image scales nicely on hover */
+.vn-gi:hover .vn-gph,
+.vn-gi:hover img {
+  transform: scale(1.08);
+  transition: transform 0.4s ease;
+}
 }
   /* ANIMATIONS */
   @keyframes fadeInUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}

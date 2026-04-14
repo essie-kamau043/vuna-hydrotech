@@ -159,6 +159,36 @@ export default function Gallery() {
     return () => observer.disconnect();
   }, []);
 
+    // Scroll Reveal Effect
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      { threshold: 0.1 }   // Trigger when 10% of element is visible
+    );
+
+    // Observe all sections with class "vn-sec"
+    document.querySelectorAll(".vn-sec").forEach((section) => {
+      observer.observe(section);
+    });
+
+    // Observe gallery cards with stagger
+    const cards = document.querySelectorAll(".vn-gi");
+    cards.forEach((card, index) => {
+      // Small delay for nice stagger effect
+      setTimeout(() => {
+        observer.observe(card);
+      }, index * 80);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className="vn-sec vn-gal-bg" id="gallery">   {/* ← Added vn-sec here */}
       <div className="vn-con">
