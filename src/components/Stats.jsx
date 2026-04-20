@@ -5,7 +5,7 @@ export default function Stats() {
   return (
     <div className="vn-stats">
       <div className="vn-stat">
-        <span className="vn-sn">500+</span>
+        <span className="vn-sn">100+</span>
         <span className="vn-sl">Water Projects</span>
       </div>
       <div className="vn-stat">
