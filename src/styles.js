@@ -368,13 +368,13 @@ export const GLOBAL_STYLES = `
     .vn-nav-cta { display: block; }
     .vn-nav-mobile { display: none; }
   }
-      /* MOBILE DROPDOWN MENU - Make links look like proper buttons */
+       /* MOBILE DROPDOWN MENU - Clean & Simple (No Rounded Buttons) */
   .vn-nav-mobile {
     display: none;
     flex-direction: column;
-    gap: 8px;
+    gap: 4px;
     width: 100%;
-    padding: 1rem 1.2rem;
+    padding: 1rem 1.2rem 1.5rem;
     background: rgba(10,61,98,0.98);
     position: absolute;
     top: 100%;
@@ -390,18 +390,21 @@ export const GLOBAL_STYLES = `
   .vn-nav-mobile a {
     display: block;
     padding: 14px 20px;
-    background: rgba(255,255,255,0.1);
     color: white;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 1.02rem;
     font-weight: 500;
-    border-radius: 10px;
     transition: all 0.2s ease;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .vn-nav-mobile a:last-child {
+    border-bottom: none;
   }
 
   .vn-nav-mobile a:hover {
-    background: rgba(255,255,255,0.25);
-    transform: translateX(8px);
+    background: rgba(255,255,255,0.12);
     color: var(--bl);
+    padding-left: 28px;
   }
 `;
