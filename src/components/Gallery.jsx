@@ -1,4 +1,3 @@
-// src/components/Gallery.jsx
 import React, { useState, useEffect, useCallback } from "react";
 import ReactDOM from "react-dom";
 import { GALLERY_ITEMS, GALLERY_TABS } from "../data";
@@ -10,7 +9,7 @@ function Thumb({ item }) {
 
   if (showPlaceholder) {
     return (
-      <div className="vn-gph" style={{ background: item.bg }}>
+      <div className="vn-gph" style={{ background: item.bg, minHeight: 200, height: "100%" }}>
         <span>{item.icon}</span>
         <p>{item.label}</p>
       </div>
@@ -23,7 +22,7 @@ function Thumb({ item }) {
       alt={item.caption}
       onError={() => setErrored(true)}
       loading="lazy"
-      className="vn-gimg"
+      style={{ width: "100%", height: "100%", minHeight: 200, objectFit: "cover", display: "block" }}
     />
   );
 }
@@ -57,7 +56,10 @@ function LightboxImage({ item }) {
       alt={item.caption}
       onError={() => setErrored(true)}
       loading="lazy"
-      style={{ width: "100%", maxHeight: "75vh", objectFit: "contain", borderRadius: 12 }}
+      style={{
+        width: "100%", maxHeight: "60vh",
+        objectFit: "contain", borderRadius: 12, display: "block",
+      }}
     />
   );
 }
@@ -66,7 +68,7 @@ function Lightbox({ item, idx, total, onClose, onNext, onPrev }) {
   return ReactDOM.createPortal(
     <div className="vn-lb" onClick={onClose}>
       <div className="vn-lbi" onClick={(e) => e.stopPropagation()}>
-        <button className="vn-lbx" onClick={onClose}>✕</button>
+        <button className="vn-lbx" onClick={onClose} aria-label="Close">✕</button>
         <div className="vn-lbc">
           <LightboxImage item={item} />
         </div>
@@ -78,8 +80,8 @@ function Lightbox({ item, idx, total, onClose, onNext, onPrev }) {
           </span>
         </div>
         <div className="vn-lbnav-row">
-          <button className="vn-lbnav" onClick={onPrev}>‹</button>
-          <button className="vn-lbnav" onClick={onNext}>›</button>
+          <button className="vn-lbnav" onClick={onPrev} aria-label="Previous">‹</button>
+          <button className="vn-lbnav" onClick={onNext} aria-label="Next">›</button>
         </div>
       </div>
     </div>,
@@ -113,6 +115,22 @@ export default function Gallery() {
     document.body.style.overflow = lbIdx !== null ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [lbIdx]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("visible"); }),
+      { threshold: 0.08, rootMargin: "0px 0px -30px 0px" }
+    );
+
+    document.querySelectorAll(".vn-sec").forEach((s) => observer.observe(s));
+
+    const cards = document.querySelectorAll(".vn-gi");
+    cards.forEach((card, index) => {
+      setTimeout(() => observer.observe(card), index * 60);
+    });
+
+    return () => observer.disconnect();
+  }, [filter]);
 
   return (
     <section className="vn-sec vn-gal-bg" id="gallery">
@@ -159,9 +177,7 @@ export default function Gallery() {
           ))}
         </div>
 
-        <div className="vn-upbanner">
-          <p>📸 <strong>Send us your project photos!</strong> WhatsApp to <strong>0701036336</strong> and we'll feature them here.</p>
-        </div>
+       
       </div>
 
       {lbIdx !== null && visible[lbIdx] && (
