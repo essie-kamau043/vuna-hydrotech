@@ -92,6 +92,56 @@ export const GALLERY_ITEMS = [
     bg: "linear-gradient(135deg,#37474f,#546e7a)",
     img: "/images/gallery/excavation-3.jpeg",
   },
+   {
+    id: 9, cat: "waterpan",
+    icon: "🏞️", label: "HDPE Water Pan",
+    caption: "Massive 500,000L Capacity Pan",
+    bg: "linear-gradient(135deg,#0a3d62,#1a6fa8)",
+    img: "/images/gallery/excavation-5.jpeg",
+  },
+  {
+    id: 10, cat: "waterpan",
+    icon: "🏞️", label: "HDPE Water Pan",
+    caption: "Community Shared Water Pan",
+    bg: "linear-gradient(135deg,#0a3d62,#1a6fa8)",
+    img: "/images/gallery/preparation.jpeg",
+  },
+  {
+    id: 11, cat: "excavation",
+    icon: "🚜", label: "Excavation",
+    caption: "Heavy Machinery Earthworks",
+    bg: "linear-gradient(135deg,#5d4037,#795548)",
+    img: "/images/gallery/excavation-1.jpeg",
+  },
+  {
+    id: 12, cat: "waterpan",
+    icon: "🔵", label: "HDPE Lining",
+    caption: "Professional Liner Installation",
+    bg: "linear-gradient(135deg,#1a237e,#283593)",
+    img: "/images/gallery/installation.jpeg",
+  },
+  
+  {
+    id: 13, cat: "waterpan",
+    icon: "💧", label: "Completed Pan",
+    caption: "Full Capacity After Heavy Rain",
+    bg: "linear-gradient(135deg,#004d40,#00695c)",
+    img: "/images/gallery/water-pan-7.jpeg",
+  },
+  {
+    id: 14, cat: "fencing",
+    icon: "🚧", label: "Fencing",
+    caption: "Secure Livestock Fencing",
+    bg: "linear-gradient(135deg,#33691e,#558b2f)",
+    img: "/images/gallery/livestock.jpeg",
+  },
+  {
+    id: 15, cat: "waterpan",
+    icon: "🏞️", label: "HDPE Water Pan",
+    caption: "Newly Completed Family Water Pan",
+    bg: "linear-gradient(135deg,#0a3d62,#1a6fa8)",
+    img: "/images/gallery/completed.jpeg",
+  },
 ];
 
 export const GALLERY_TABS = [

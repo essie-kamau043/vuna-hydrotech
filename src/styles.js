@@ -13,7 +13,6 @@ export const GLOBAL_STYLES = `
   body{font-family:'DM Sans',sans-serif;background:var(--w);color:var(--td);overflow-x:hidden;}
 
   /* ==================== NAV ==================== */
-    /* ==================== NAV ==================== */
   .vn-nav {
     position: fixed;
     top: 0;
@@ -66,7 +65,25 @@ export const GLOBAL_STYLES = `
 
   .vn-nav-links a:hover { color: var(--bl); }
 
-   /* ==================== HAMBURGER MENU FIX (Minimal) ==================== */
+  /* ==================== LOGO VISIBILITY FIX ==================== */
+  .vn-logo-txt {
+    color: #fff !important;
+    font-family: 'Fraunces', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .vn-logo-txt span {
+    color: var(--gl) !important;
+  }
+
+  .vn-logo-sub {
+    color: rgba(255,255,255,0.7) !important;
+    font-size: 0.6rem;
+  }
+
+  /* ==================== HAMBURGER MENU ==================== */
   .vn-hamburger {
     background: none;
     border: none;
@@ -80,15 +97,14 @@ export const GLOBAL_STYLES = `
   .vn-nav-mobile {
     display: none;
     flex-direction: column;
-    gap: 1rem;
+    gap: 4px;
     width: 100%;
-    text-align: center;
+    padding: 1rem 1.2rem 1.5rem;
     background: rgba(10,61,98,0.98);
-    padding: 1rem 0;
     position: absolute;
     top: 100%;
     left: 0;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
     list-style: none;
   }
 
@@ -96,23 +112,42 @@ export const GLOBAL_STYLES = `
     display: flex;
   }
 
-  /* Mobile */
+  .vn-nav-mobile a {
+    display: block;
+    padding: 14px 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 1.02rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .vn-nav-mobile a:last-child {
+    border-bottom: none;
+  }
+
+  .vn-nav-mobile a:hover {
+    background: rgba(255,255,255,0.12);
+    color: var(--bl);
+    padding-left: 28px;
+  }
+
   @media (max-width: 768px) {
     .vn-hamburger { display: block; }
-    .vn-nav-links { display: none; }           /* Hide desktop links on mobile */
-    .vn-nav-cta { display: none; }             /* Hide phone on small mobile */
+    .vn-nav-links { display: none; }
+    .vn-nav-cta { display: none; }
     .vn-nav-mobile { display: none; }
     .vn-nav-mobile.open { display: flex; }
   }
 
-  /* Desktop - Restore original look */
   @media (min-width: 769px) {
     .vn-hamburger { display: none; }
     .vn-nav-links { display: flex; }
     .vn-nav-cta { display: block; }
-    .vn-nav-mobile { display: none; }
+    .vn-nav-mobile { display: none !important; }
   }
-  }
+
   /* ==================== TRUST BAR ==================== */
   .vn-trust{background:var(--gd);padding:0.52rem 1.2rem;display:flex;justify-content:center;align-items:center;gap:1.2rem;flex-wrap:wrap;}
   .vn-trust span{color:rgba(255,255,255,0.88);font-size:0.78rem;font-weight:600;letter-spacing:0.3px;}
@@ -141,21 +176,21 @@ export const GLOBAL_STYLES = `
   .vn-ring:nth-child(3){inset:-60px;animation-delay:2s;border-color:rgba(79,195,247,0.1);}
   .vn-dropsvg{width:100%;height:100%;filter:drop-shadow(0 20px 60px rgba(26,111,168,0.5));}
 
-  /* STATS */
+  /* ==================== STATS ==================== */
   .vn-stats{background:var(--bd);padding:1.8rem 2rem;display:flex;justify-content:center;flex-wrap:wrap;border-bottom:3px solid var(--gm);}
   .vn-stat{text-align:center;padding:0.5rem 2.5rem;border-right:1px solid rgba(255,255,255,0.1);}
   .vn-stat:last-child{border-right:none;}
   .vn-sn{font-family:'Fraunces',serif;font-size:2.2rem;font-weight:900;color:var(--bl);display:block;}
   .vn-sl{color:rgba(255,255,255,0.7);font-size:0.82rem;font-weight:500;}
 
-  /* SECTION BASE */
+  /* ==================== SECTION BASE ==================== */
   .vn-sec{padding:5rem 1.2rem;}
   .vn-con{max-width:1200px;margin:0 auto;padding:0 1rem;}
   .vn-lbl{display:inline-block;color:var(--gm);font-size:0.76rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:0.6rem;}
   .vn-ttl{font-family:'Fraunces',serif;font-size:clamp(1.85rem,3.2vw,2.8rem);font-weight:800;color:var(--td);line-height:1.15;margin-bottom:1rem;}
   .vn-sub{color:var(--tm);font-size:1rem;line-height:1.72;max-width:600px;}
 
-  /* SERVICES, HDPE, WHY, PROCESS, GALLERY, LIGHTBOX, CONTACT, FOOTER */
+  /* ==================== SERVICES ==================== */
   .vn-svc-bg{background:var(--ow);}
   .vn-svc-hd{text-align:center;margin-bottom:3rem;}
   .vn-svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
@@ -169,6 +204,7 @@ export const GLOBAL_STYLES = `
   .vn-card h3{font-family:'Fraunces',serif;font-size:1.18rem;font-weight:700;margin-bottom:0.5rem;color:var(--td);}
   .vn-card p{color:var(--tm);font-size:0.88rem;line-height:1.65;}
 
+  /* ==================== HDPE ==================== */
   .vn-hdpe{background:linear-gradient(135deg,#040f1a,#0a3d62,#0d4f3c);padding:3.5rem 2rem;text-align:center;position:relative;overflow:hidden;}
   .vn-hdpe::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(255,255,255,0.05) 1px,transparent 0);background-size:32px 32px;}
   .vn-hdpe-in{max-width:900px;margin:0 auto;position:relative;z-index:1;}
@@ -178,6 +214,7 @@ export const GLOBAL_STYLES = `
   .vn-hdpe-feats{display:flex;justify-content:center;gap:1.8rem;flex-wrap:wrap;margin-bottom:2rem;}
   .vn-hdpe-f{display:flex;align-items:center;gap:0.5rem;color:var(--gl);font-weight:600;font-size:0.9rem;}
 
+  /* ==================== WHY ==================== */
   .vn-why{background:linear-gradient(160deg,var(--bd) 0%,#0a2e1e 100%);color:#fff;position:relative;overflow:hidden;}
   .vn-why::before{content:'';position:absolute;right:-200px;top:-100px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(76,175,80,0.12) 0%,transparent 70%);}
   .vn-why .vn-ttl{color:#fff;}
@@ -195,6 +232,7 @@ export const GLOBAL_STYLES = `
   .vn-cs strong{display:block;font-size:0.9rem;color:#fff;}
   .vn-cs small{color:rgba(255,255,255,0.5);font-size:0.78rem;}
 
+  /* ==================== PROCESS ==================== */
   .vn-proc-bg{background:#fff;}
   .vn-proc-hd{text-align:center;margin-bottom:3.5rem;}
   .vn-proc-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:1.8rem;position:relative;}
@@ -205,7 +243,6 @@ export const GLOBAL_STYLES = `
   .vn-ps p{font-size:0.85rem;color:var(--tm);line-height:1.55;}
 
   /* ==================== GALLERY ==================== */
-
   .vn-gal-bg { background: var(--ow); }
   .vn-gal-hd { text-align: center; margin-bottom: 1.5rem; }
 
@@ -225,23 +262,21 @@ export const GLOBAL_STYLES = `
     background: var(--bd); color: #fff; border-color: var(--bd);
   }
 
-  /* ── Grid layout ── */
+  /* Grid layout */
   .vn-ggrid {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     gap: 14px;
   }
 
-  /* Card stagger animation */
+  /* Card stagger animation on filter change */
   .vn-gi {
     position: relative; overflow: hidden; border-radius: 16px;
     cursor: pointer;
-    /* Staggered fade-in on filter change */
     opacity: 0;
     transform: translateY(24px) scale(0.97);
     animation: gi-appear 0.45s ease forwards;
     animation-delay: calc(var(--stagger, 0) * 55ms);
-    /* Thin border for depth */
     box-shadow: 0 2px 8px rgba(0,0,0,0.1), 0 0 0 1px rgba(255,255,255,0.55);
   }
 
@@ -249,7 +284,7 @@ export const GLOBAL_STYLES = `
     to { opacity: 1; transform: translateY(0) scale(1); }
   }
 
-  /* Grid spans — same as before */
+  /* Grid spans */
   .vn-gi:nth-child(1)  { grid-column: span 5; grid-row: span 2; }
   .vn-gi:nth-child(2)  { grid-column: span 4; }
   .vn-gi:nth-child(3)  { grid-column: span 3; }
@@ -260,12 +295,12 @@ export const GLOBAL_STYLES = `
   .vn-gi:nth-child(8)  { grid-column: span 4; }
   .vn-gi:nth-child(9)  { grid-column: span 8; }
 
-  /* Inner wrapper so we can zoom the image without clipping the card */
+  /* Inner wrapper isolates zoom from card border-radius */
   .vn-gi-inner {
     width: 100%; height: 100%; overflow: hidden;
   }
 
-  /* Image zoom on hover/tap */
+  /* Image zoom on hover / tap */
   .vn-gi-img {
     transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     will-change: transform;
@@ -275,7 +310,7 @@ export const GLOBAL_STYLES = `
     transform: scale(1.08);
   }
 
-  /* ── Placeholder card ── */
+  /* Placeholder card */
   .vn-gph {
     width: 100%; min-height: 200px; height: 100%;
     display: flex; flex-direction: column;
@@ -289,7 +324,7 @@ export const GLOBAL_STYLES = `
     transform: scale(1.06);
   }
 
-  /* Dot-grid texture inside placeholder */
+  /* Dot-grid texture on placeholder */
   .vn-gph::before {
     content: '';
     position: absolute; inset: 0;
@@ -316,7 +351,7 @@ export const GLOBAL_STYLES = `
     position: relative; z-index: 1;
   }
 
-  /* Animated shine sweep across placeholder */
+  /* Animated shine sweep on placeholder */
   .vn-gph-shine {
     position: absolute; inset: 0;
     background: linear-gradient(
@@ -336,7 +371,7 @@ export const GLOBAL_STYLES = `
     transition: background-position 0.65s ease;
   }
 
-  /* ── Category chip ── */
+  /* Category chip */
   .vn-gchip {
     position: absolute; top: 10px; left: 10px; z-index: 3;
     background: rgba(10,61,98,0.78);
@@ -356,7 +391,7 @@ export const GLOBAL_STYLES = `
     transform: translateY(0);
   }
 
-  /* ── Overlay ── */
+  /* Gradient overlay */
   .vn-gov {
     position: absolute; inset: 0;
     background: linear-gradient(
@@ -375,7 +410,7 @@ export const GLOBAL_STYLES = `
     opacity: 1;
   }
 
-  /* Shine sweep on the overlay */
+  /* Shine sweep on overlay */
   .vn-gov-shine {
     position: absolute; inset: 0;
     background: linear-gradient(
@@ -394,7 +429,7 @@ export const GLOBAL_STYLES = `
     transition: background-position 0.7s ease;
   }
 
-  /* ── Caption inside overlay ── */
+  /* Caption inside overlay */
   .vn-gcap {
     display: flex; flex-direction: column; gap: 0.22rem;
     position: relative; z-index: 1;
@@ -431,7 +466,7 @@ export const GLOBAL_STYLES = `
     opacity: 1;
   }
 
-  /* ── Mobile tap pulse ring ── */
+  /* Mobile tap pulse ring */
   @keyframes tap-ring-pulse {
     0%   { transform: scale(0.7); opacity: 0.7; }
     100% { transform: scale(2.2); opacity: 0; }
@@ -444,7 +479,7 @@ export const GLOBAL_STYLES = `
     pointer-events: none; z-index: 10;
   }
 
-  /* ── Upload banner ── */
+  /* Upload banner */
   .vn-upbanner {
     background: linear-gradient(135deg, rgba(26,111,168,0.1), rgba(46,125,50,0.1));
     border: 2px dashed rgba(26,111,168,0.3);
@@ -452,33 +487,6 @@ export const GLOBAL_STYLES = `
     text-align: center; margin-top: 2rem;
   }
   .vn-upbanner p { color: var(--tm); font-size: 0.88rem; }
-
-  /* ── MOBILE: single column + always-visible caption bar ── */
-  @media (max-width: 768px) {
-    .vn-ggrid {
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-    .vn-gi:nth-child(n) {
-      grid-column: span 1 !important;
-      grid-row: span 1 !important;
-    }
-    /* On mobile, show a persistent bottom bar instead of relying on hover */
-    .vn-gov {
-      opacity: 1;
-      background: linear-gradient(to top, rgba(4,15,26,0.82) 0%, transparent 60%);
-    }
-    .vn-gcap { transform: translateY(0); }
-    .vn-gcap-hint { opacity: 0.9; } /* always show "tap again to view" */
-    .vn-gov-shine { display: none; }
-    /* Chip always visible on mobile */
-    .vn-gchip { opacity: 1; transform: translateY(0); }
-  }
-
-  @media (max-width: 480px) {
-    .vn-ggrid { grid-template-columns: 1fr; }
-    .vn-gi:nth-child(n) { grid-column: span 1 !important; }
-  }
 
   /* ==================== LIGHTBOX ==================== */
   .vn-lb {
@@ -498,7 +506,7 @@ export const GLOBAL_STYLES = `
   }
   @keyframes lb-slide-up {
     from { transform: translateY(20px); opacity: 0; }
-    to   { transform: translateY(0); opacity: 1; }
+    to   { transform: translateY(0);    opacity: 1; }
   }
 
   .vn-lbc {
@@ -543,6 +551,7 @@ export const GLOBAL_STYLES = `
   }
   .vn-lbnav:hover { background: rgba(255,255,255,0.22); transform: scale(1.1); }
 
+  /* ==================== CONTACT ==================== */
   .vn-ctc{background:linear-gradient(135deg,#0a3d62 0%,#1b5e20 100%);color:#fff;text-align:center;}
   .vn-ctc .vn-ttl{color:#fff;}
   .vn-ctc .vn-sub{color:rgba(255,255,255,0.72);margin:0 auto 3rem;}
@@ -568,6 +577,7 @@ export const GLOBAL_STYLES = `
   .vn-tip p{font-size:0.87rem;color:rgba(255,255,255,0.8);line-height:1.6;}
   .vn-toast{background:rgba(76,175,80,0.18);border:1px solid rgba(76,175,80,0.45);border-radius:12px;padding:1rem 1.5rem;margin-bottom:1.5rem;color:#a5d6a7;font-weight:600;text-align:left;}
 
+  /* ==================== FOOTER ==================== */
   .vn-footer{background:#030c14;color:rgba(255,255,255,0.45);padding:2rem;text-align:center;font-size:0.82rem;}
   .vn-footer strong{color:var(--bl);}
   .vn-fphone{color:var(--gl);font-size:1rem;font-weight:700;display:block;margin-bottom:0.4rem;text-decoration:none;}
@@ -595,118 +605,39 @@ export const GLOBAL_STYLES = `
     .vn-hero p{font-size:0.97rem;}
     .vn-hero-btns{flex-direction:column;max-width:300px;margin:0 auto;}
     .vn-btn-p,.vn-btn-s{width:100%;}
-
     .vn-visual{display:none;}
     .vn-sec{padding:3.8rem 1.2rem 5rem;}
-    .vn-svc-grid,.vn-ggrid{grid-template-columns:1fr;}
+    .vn-svc-grid{grid-template-columns:1fr;}
     .vn-why-grid{grid-template-columns:1fr;gap:2.2rem;}
     .vn-proc-grid{grid-template-columns:1fr;gap:1.6rem;}
     .vn-ctc-grid{grid-template-columns:1fr;}
-
     .vn-wa{width:60px;height:60px;bottom:20px;right:20px;}
     .vn-wa-icon{width:50px;height:50px;}
     .vn-back-to-top{bottom:92px;right:18px;width:44px;height:44px;font-size:1.25rem;}
-  }
-      /* ==================== LOGO VISIBILITY FIX + HAMBURGER ==================== */
-  .vn-logo-txt {
-    color: #fff !important;
-    font-family: 'Fraunces', serif;
-    font-size: 1.2rem;
-    font-weight: 700;
-    line-height: 1.1;
+
+    /* Gallery: 2-column grid on mobile */
+    .vn-ggrid {
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .vn-gi:nth-child(n) {
+      grid-column: span 1 !important;
+      grid-row: span 1 !important;
+    }
+    /* Overlay always visible on mobile — no hover needed */
+    .vn-gov {
+      opacity: 1;
+      background: linear-gradient(to top, rgba(4,15,26,0.82) 0%, transparent 60%);
+    }
+    .vn-gcap { transform: translateY(0); }
+    .vn-gcap-hint { opacity: 0.9; }
+    .vn-gov-shine { display: none; }
+    /* Chip always visible on mobile */
+    .vn-gchip { opacity: 1; transform: translateY(0); }
   }
 
-  .vn-logo-txt span {
-    color: var(--gl) !important;
-  }
-
-  .vn-logo-sub {
-    color: rgba(255,255,255,0.7) !important;
-    font-size: 0.6rem;
-  }
-
-  .vn-hamburger {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.8rem;
-    cursor: pointer;
-    padding: 8px 12px;
-    display: none;
-  }
-
-  .vn-nav-mobile {
-    display: none;
-    flex-direction: column;
-    gap: 1rem;
-    width: 100%;
-    text-align: center;
-    background: rgba(10,61,98,0.98);
-    padding: 1rem 0;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    list-style: none;
-  }
-
-  .vn-nav-mobile.open {
-    display: flex;
-  }
-
-  /* Mobile */
-  @media (max-width: 768px) {
-    .vn-hamburger { display: block; }
-    .vn-nav-links { display: none; }
-    .vn-nav-cta { display: none; }
-    .vn-nav-mobile { display: none; }
-    .vn-nav-mobile.open { display: flex; }
-  }
-
-  /* Desktop - Original look */
-  @media (min-width: 769px) {
-    .vn-hamburger { display: none; }
-    .vn-nav-links { display: flex; }
-    .vn-nav-cta { display: block; }
-    .vn-nav-mobile { display: none; }
-  }
-       /* MOBILE DROPDOWN MENU - Clean & Simple (No Rounded Buttons) */
-  .vn-nav-mobile {
-    display: none;
-    flex-direction: column;
-    gap: 4px;
-    width: 100%;
-    padding: 1rem 1.2rem 1.5rem;
-    background: rgba(10,61,98,0.98);
-    position: absolute;
-    top: 100%;
-    left: 0;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-    list-style: none;
-  }
-
-  .vn-nav-mobile.open {
-    display: flex;
-  }
-
-  .vn-nav-mobile a {
-    display: block;
-    padding: 14px 20px;
-    color: white;
-    text-decoration: none;
-    font-size: 1.02rem;
-    font-weight: 500;
-    transition: all 0.2s ease;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-  }
-
-  .vn-nav-mobile a:last-child {
-    border-bottom: none;
-  }
-
-  .vn-nav-mobile a:hover {
-    background: rgba(255,255,255,0.12);
-    color: var(--bl);
-    padding-left: 28px;
+  @media(max-width:480px){
+    .vn-ggrid { grid-template-columns: 1fr; }
+    .vn-gi:nth-child(n) { grid-column: span 1 !important; }
   }
 `;
