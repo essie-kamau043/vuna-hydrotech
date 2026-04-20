@@ -6,6 +6,7 @@ export default function Navbar() {
 
   return (
     <nav className="vn-nav">
+      {/* Logo - Left */}
       <div className="vn-logo">
         <div className="vn-logo-txt">
           VUNA <span>HYDROTECH</span> (K) LTD
@@ -13,8 +14,23 @@ export default function Navbar() {
         </div>
       </div>
 
+      {/* Navigation Links - Center on desktop */}
+      <ul className="vn-nav-links">
+        {[
+          ["#services", "Services"],
+          ["#why", "Why Us"],
+          ["#process", "Process"],
+          ["#gallery", "Gallery"],
+          ["#contact", "Contact"]
+        ].map(([h, l]) => (
+          <li key={h}><a href={h}>{l}</a></li>
+        ))}
+      </ul>
+
+      {/* Phone Button - Right */}
       <a href="tel:0701036336" className="vn-nav-cta">📞 0701 036 336</a>
 
+      {/* Hamburger - Right on mobile */}
       <button 
         className="vn-hamburger" 
         onClick={() => setMenuOpen(!menuOpen)}
@@ -23,7 +39,8 @@ export default function Navbar() {
         {menuOpen ? '✕' : '☰'}
       </button>
 
-      <ul className={`vn-nav-links ${menuOpen ? 'open' : ''}`}>
+      {/* Mobile Dropdown Menu */}
+      <ul className={`vn-nav-mobile ${menuOpen ? 'open' : ''}`}>
         {[
           ["#services", "Services"],
           ["#why", "Why Us"],
