@@ -13,33 +13,96 @@ export const GLOBAL_STYLES = `
   body{font-family:'DM Sans',sans-serif;background:var(--w);color:var(--td);overflow-x:hidden;}
 
   /* ==================== NAV ==================== */
-  .vn-nav{
-    position:fixed;top:0;width:100%;z-index:1000;
-    background:rgba(10,61,98,0.97);backdrop-filter:blur(12px);
-    padding:1rem 1.2rem;display:flex;justify-content:space-between;align-items:center;
-    border-bottom:2px solid rgba(79,195,247,0.25);flex-wrap:wrap;gap:12px;
-  }
-  .vn-logo{display:flex;align-items:center;cursor:pointer;background:none;border:none;gap:0.6rem;flex:1;}
-  .vn-logo-txt{color:#fff;font-family:'Fraunces',serif;font-size:1.2rem;font-weight:700;line-height:1.1;text-align:left;}
-  .vn-logo-txt span{color:var(--gl);}
-  .vn-logo-sub{font-family:'DM Sans',sans-serif;font-weight:300;font-size:0.6rem;color:rgba(255,255,255,0.5);letter-spacing:2px;display:block;text-transform:uppercase;}
   
-  .vn-hamburger{background:none;border:none;color:white;font-size:1.8rem;cursor:pointer;padding:8px;display:block;z-index:10;}
-  .vn-nav-cta{background:var(--gm);color:#fff;padding:0.5rem 1.4rem;border-radius:50px;font-weight:700;font-size:0.88rem;transition:background 0.2s,transform 0.2s;border:none;cursor:pointer;text-decoration:none;}
-  .vn-nav-cta:hover{background:var(--gb);transform:translateY(-1px);}
-
-  .vn-nav-links{display:none;flex-direction:column;gap:1rem;width:100%;text-align:center;background:rgba(10,61,98,0.98);padding:1rem 0;position:absolute;top:100%;left:0;box-shadow:0 4px 10px rgba(0,0,0,0.2);list-style:none;}
-  .vn-nav-links.open{display:flex;}
-  .vn-nav-links a{color:rgba(255,255,255,0.85);text-decoration:none;font-size:0.95rem;font-weight:500;transition:color 0.2s;padding:0.4rem 0;display:block;}
-  .vn-nav-links a:hover{color:var(--bl);}
-
-  @media(min-width:769px){
-    .vn-nav{padding:0.85rem 2rem;flex-wrap:nowrap;}
-    .vn-hamburger{display:none;}
-    .vn-nav-cta{display:block;}
-    .vn-nav-links{display:flex;flex-direction:row;gap:2rem;position:static;background:transparent;padding:0;box-shadow:none;width:auto;}
+  /* ==================== NAV ==================== */
+  .vn-nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(10,61,98,0.97);
+    backdrop-filter: blur(12px);
+    padding: 1rem 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid rgba(79,195,247,0.25);
   }
 
+  .vn-logo {
+    flex: 1;
+  }
+
+  .vn-nav-cta {
+    display: none;                    /* hidden on mobile */
+    background: var(--gm);
+    color: #fff;
+    padding: 0.5rem 1.4rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.88rem;
+    transition: background 0.2s;
+  }
+
+  .vn-hamburger {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: 8px 12px;
+    display: block;
+  }
+
+  .vn-nav-links {
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    text-align: center;
+    background: rgba(10,61,98,0.98);
+    padding: 1rem 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    list-style: none;
+  }
+
+  .vn-nav-links.open {
+    display: flex;
+  }
+
+  .vn-nav-links a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 0.5rem 0;
+  }
+
+  /* Desktop */
+  @media (min-width: 769px) {
+    .vn-nav {
+      padding: 0.85rem 2rem;
+    }
+    .vn-nav-cta {
+      display: block;
+    }
+    .vn-hamburger {
+      display: none;
+    }
+    .vn-nav-links {
+      display: flex;
+      flex-direction: row;
+      gap: 2rem;
+      position: static;
+      background: transparent;
+      padding: 0;
+      box-shadow: none;
+      width: auto;
+    }
+  }
   /* ==================== TRUST BAR ==================== */
   .vn-trust{background:var(--gd);padding:0.52rem 1.2rem;display:flex;justify-content:center;align-items:center;gap:1.2rem;flex-wrap:wrap;}
   .vn-trust span{color:rgba(255,255,255,0.88);font-size:0.78rem;font-weight:600;letter-spacing:0.3px;}
