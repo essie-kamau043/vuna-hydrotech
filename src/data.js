@@ -26,10 +26,11 @@ export const CYCLE_STEPS = [
 
 export const PROCESS_STEPS = [
   { n: 1, title: "Client Consultation",     icon: "🤝", desc: "Site assessment, professional advice, and custom design. Every successful water project begins with understanding your needs." },
-  { n: 2, title: "Excavation",              icon: "🚜", desc: "Our skilled team excavates and shapes your water pan for maximum capacity and durability using engineered design." },
-  { n: 3, title: "HDPE Liner Installation", icon: "🔵", desc: "We install high-quality HDPE liners that prevent seepage — ensuring every drop of water is saved and ready for use." },
-  { n: 4, title: "Fencing",                 icon: "🚧", desc: "We secure your water pan with strong fencing — keeping livestock safe and preventing damage to the liner." },
-  { n: 5, title: "Water Utilization",       icon: "🌾", desc: "From irrigation to livestock, your water pan becomes a reliable source of life — boosting productivity and transforming your farm." },
+  { n: 2, title: "Bill of Quantity & Contracting", icon: "📋", desc: "Detailed Bill of Quantities (BoQ) is prepared. Client reviews and signs the formal contract before work begins." },
+  { n: 3, title: "Excavation",              icon: "🚜", desc: "Our skilled team excavates and shapes your water pan for maximum capacity and durability using engineered design." },
+  { n: 4, title: "HDPE Liner Installation", icon: "🔵", desc: "We install high-quality HDPE liners that prevent seepage — ensuring every drop of water is saved and ready for use." },
+  { n: 5, title: "Fencing",                 icon: "🚧", desc: "We secure your water pan with strong fencing — keeping livestock safe and preventing damage to the liner." },
+  { n: 6, title: "Water Utilization",       icon: "🌾", desc: "From irrigation to livestock, your water pan becomes a reliable source of life — boosting productivity and transforming your farm." },
 ];
 
 
