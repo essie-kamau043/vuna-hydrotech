@@ -319,4 +319,59 @@ export const GLOBAL_STYLES = `
     .vn-wa-icon{width:50px;height:50px;}
     .vn-back-to-top{bottom:92px;right:18px;width:44px;height:44px;font-size:1.25rem;}
   }
+      /* HAMBURGER MENU - Minimal addition */
+  .vn-hamburger {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: 8px;
+    display: none;
+  }
+
+  .vn-nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  /* Mobile behavior */
+  @media (max-width: 768px) {
+    .vn-hamburger {
+      display: block;
+    }
+    .vn-nav-links {
+      display: none;
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
+      text-align: center;
+      background: rgba(10,61,98,0.98);
+      padding: 1rem 0;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    .vn-nav-links.open {
+      display: flex;
+    }
+    .vn-nav-cta {
+      display: none;   /* hide phone button on small mobile */
+    }
+  }
+
+  /* Keep original desktop look */
+  @media (min-width: 769px) {
+    .vn-nav-links {
+      display: flex;
+    }
+    .vn-hamburger {
+      display: none;
+    }
+    .vn-nav-cta {
+      display: block;
+    }
+  }
 `;
