@@ -14,7 +14,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Navigation Links - Center on desktop */}
+      {/* Desktop Links */}
       <ul className="vn-nav-links">
         {[
           ["#services", "Services"],
@@ -27,10 +27,10 @@ export default function Navbar() {
         ))}
       </ul>
 
-      {/* Phone Button - Right */}
+      {/* Phone Button */}
       <a href="tel:0701036336" className="vn-nav-cta">📞 0701 036 336</a>
 
-      {/* Hamburger - Right on mobile */}
+      {/* Hamburger - Right side */}
       <button 
         className="vn-hamburger" 
         onClick={() => setMenuOpen(!menuOpen)}
@@ -39,7 +39,7 @@ export default function Navbar() {
         {menuOpen ? '✕' : '☰'}
       </button>
 
-      {/* Mobile Dropdown Menu */}
+      {/* Mobile Dropdown */}
       <ul className={`vn-nav-mobile ${menuOpen ? 'open' : ''}`}>
         {[
           ["#services", "Services"],

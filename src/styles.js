@@ -13,6 +13,7 @@ export const GLOBAL_STYLES = `
   body{font-family:'DM Sans',sans-serif;background:var(--w);color:var(--td);overflow-x:hidden;}
 
   /* ==================== NAV ==================== */
+    /* ==================== NAV ==================== */
   .vn-nav {
     position: fixed;
     top: 0;
@@ -28,50 +29,8 @@ export const GLOBAL_STYLES = `
   }
 
   .vn-logo {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    background: none;
-    border: none;
-    gap: 0.6rem;
+    flex: 1;
   }
-
-  .vn-logo-txt {
-    color: #fff;
-    font-family: 'Fraunces', serif;
-    font-size: 1.2rem;
-    font-weight: 700;
-    line-height: 1.1;
-    text-align: left;
-  }
-
-  .vn-logo-txt span { color: var(--gl); }
-
-  .vn-logo-sub {
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-    font-size: 0.6rem;
-    color: rgba(255,255,255,0.5);
-    letter-spacing: 2px;
-    display: block;
-    text-transform: uppercase;
-  }
-
-  .vn-nav-links {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-  }
-
-  .vn-nav-links a {
-    color: rgba(255,255,255,0.8);
-    text-decoration: none;
-    font-size: 0.87rem;
-    font-weight: 500;
-    transition: color 0.2s;
-  }
-
-  .vn-nav-links a:hover { color: var(--bl); }
 
   .vn-nav-cta {
     background: var(--gm);
@@ -91,6 +50,23 @@ export const GLOBAL_STYLES = `
     transform: translateY(-1px);
   }
 
+  .vn-nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .vn-nav-links a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    font-size: 0.87rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .vn-nav-links a:hover { color: var(--bl); }
+
+   /* ==================== HAMBURGER MENU FIX (Minimal) ==================== */
   .vn-hamburger {
     background: none;
     border: none;
@@ -101,42 +77,42 @@ export const GLOBAL_STYLES = `
     display: none;
   }
 
-  /* Mobile Hamburger Menu */
-  @media (max-width: 768px) {
-    .vn-nav {
-      padding: 1rem 1.2rem;
-    }
-    .vn-hamburger {
-      display: block;
-    }
-    .vn-nav-links {
-      display: none;
-      flex-direction: column;
-      gap: 1rem;
-      width: 100%;
-      text-align: center;
-      background: rgba(10,61,98,0.98);
-      padding: 1rem 0;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    }
-    .vn-nav-links.open {
-      display: flex;
-    }
-    .vn-nav-cta {
-      display: none;
-    }
+  .vn-nav-mobile {
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    text-align: center;
+    background: rgba(10,61,98,0.98);
+    padding: 1rem 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    list-style: none;
   }
 
-  /* Desktop - Original Look Restored */
+  .vn-nav-mobile.open {
+    display: flex;
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .vn-hamburger { display: block; }
+    .vn-nav-links { display: none; }           /* Hide desktop links on mobile */
+    .vn-nav-cta { display: none; }             /* Hide phone on small mobile */
+    .vn-nav-mobile { display: none; }
+    .vn-nav-mobile.open { display: flex; }
+  }
+
+  /* Desktop - Restore original look */
   @media (min-width: 769px) {
     .vn-hamburger { display: none; }
     .vn-nav-links { display: flex; }
     .vn-nav-cta { display: block; }
+    .vn-nav-mobile { display: none; }
   }
-
+  }
   /* ==================== TRUST BAR ==================== */
   .vn-trust{background:var(--gd);padding:0.52rem 1.2rem;display:flex;justify-content:center;align-items:center;gap:1.2rem;flex-wrap:wrap;}
   .vn-trust span{color:rgba(255,255,255,0.88);font-size:0.78rem;font-weight:600;letter-spacing:0.3px;}
@@ -328,5 +304,68 @@ export const GLOBAL_STYLES = `
     .vn-wa{width:60px;height:60px;bottom:20px;right:20px;}
     .vn-wa-icon{width:50px;height:50px;}
     .vn-back-to-top{bottom:92px;right:18px;width:44px;height:44px;font-size:1.25rem;}
+  }
+      /* ==================== LOGO VISIBILITY FIX + HAMBURGER ==================== */
+  .vn-logo-txt {
+    color: #fff !important;
+    font-family: 'Fraunces', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .vn-logo-txt span {
+    color: var(--gl) !important;
+  }
+
+  .vn-logo-sub {
+    color: rgba(255,255,255,0.7) !important;
+    font-size: 0.6rem;
+  }
+
+  .vn-hamburger {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: 8px 12px;
+    display: none;
+  }
+
+  .vn-nav-mobile {
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    text-align: center;
+    background: rgba(10,61,98,0.98);
+    padding: 1rem 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    list-style: none;
+  }
+
+  .vn-nav-mobile.open {
+    display: flex;
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .vn-hamburger { display: block; }
+    .vn-nav-links { display: none; }
+    .vn-nav-cta { display: none; }
+    .vn-nav-mobile { display: none; }
+    .vn-nav-mobile.open { display: flex; }
+  }
+
+  /* Desktop - Original look */
+  @media (min-width: 769px) {
+    .vn-hamburger { display: none; }
+    .vn-nav-links { display: flex; }
+    .vn-nav-cta { display: block; }
+    .vn-nav-mobile { display: none; }
   }
 `;
