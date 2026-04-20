@@ -3,7 +3,6 @@ import React, { useEffect } from 'react';
 import { GLOBAL_STYLES } from './styles';
 
 import Navbar from './components/Navbar';
-import TrustBar from './components/TrustBar';
 import Hero from './components/Hero';
 import Stats from './components/Stats';
 import Services from './components/Services';
@@ -40,7 +39,7 @@ export default function App() {
       <style>{GLOBAL_STYLES}</style>
       
       <Navbar />
-      <TrustBar />
+      
       <Hero />
       <Stats />
       <Services />

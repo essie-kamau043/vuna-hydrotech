@@ -148,9 +148,7 @@ export const GLOBAL_STYLES = `
     .vn-nav-mobile { display: none !important; }
   }
 
-  /* ==================== TRUST BAR ==================== */
-  .vn-trust{background:var(--gd);padding:0.52rem 1.2rem;display:flex;justify-content:center;align-items:center;gap:1.2rem;flex-wrap:wrap;}
-  .vn-trust span{color:rgba(255,255,255,0.88);font-size:0.78rem;font-weight:600;letter-spacing:0.3px;}
+  
 
   /* ==================== HERO ==================== */
   .vn-hero{min-height:100vh;background:radial-gradient(ellipse at 15% 60%,rgba(26,111,168,0.3) 0%,transparent 55%),radial-gradient(ellipse at 85% 15%,rgba(46,125,50,0.25) 0%,transparent 50%),linear-gradient(160deg,#040f1a 0%,#0a3d62 45%,#0d4f3c 100%);display:flex;align-items:center;padding:6rem 1.2rem 4rem;position:relative;overflow:hidden;}
