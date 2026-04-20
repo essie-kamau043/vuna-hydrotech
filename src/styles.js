@@ -368,4 +368,40 @@ export const GLOBAL_STYLES = `
     .vn-nav-cta { display: block; }
     .vn-nav-mobile { display: none; }
   }
+      /* MOBILE DROPDOWN MENU - Make links look like proper buttons */
+  .vn-nav-mobile {
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    padding: 1rem 1.2rem;
+    background: rgba(10,61,98,0.98);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    list-style: none;
+  }
+
+  .vn-nav-mobile.open {
+    display: flex;
+  }
+
+  .vn-nav-mobile a {
+    display: block;
+    padding: 14px 20px;
+    background: rgba(255,255,255,0.1);
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+  }
+
+  .vn-nav-mobile a:hover {
+    background: rgba(255,255,255,0.25);
+    transform: translateX(8px);
+    color: var(--bl);
+  }
 `;
