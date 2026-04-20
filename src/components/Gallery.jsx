@@ -1,17 +1,21 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import ReactDOM from "react-dom";
 import { GALLERY_ITEMS, GALLERY_TABS } from "../data";
 
-function Thumb({ item }) {
+function Thumb({ item, isActive }) {
   const [errored, setErrored] = useState(false);
   const hasRealImage = item.img && item.img.trim() !== "";
   const showPlaceholder = !hasRealImage || errored;
 
   if (showPlaceholder) {
     return (
-      <div className="vn-gph" style={{ background: item.bg, minHeight: 200, height: "100%" }}>
-        <span>{item.icon}</span>
+      <div
+        className="vn-gph"
+        style={{ "--ph-bg": item.bg, minHeight: 200, height: "100%" }}
+      >
+        <span className="vn-gph-icon">{item.icon}</span>
         <p>{item.label}</p>
+        <div className="vn-gph-shine" />
       </div>
     );
   }
@@ -22,6 +26,7 @@ function Thumb({ item }) {
       alt={item.caption}
       onError={() => setErrored(true)}
       loading="lazy"
+      className={`vn-gi-img${isActive ? " zoomed" : ""}`}
       style={{ width: "100%", height: "100%", minHeight: 200, objectFit: "cover", display: "block" }}
     />
   );
@@ -69,9 +74,11 @@ function Lightbox({ item, idx, total, onClose, onNext, onPrev }) {
     <div className="vn-lb" onClick={onClose}>
       <div className="vn-lbi" onClick={(e) => e.stopPropagation()}>
         <button className="vn-lbx" onClick={onClose} aria-label="Close">✕</button>
+
         <div className="vn-lbc">
           <LightboxImage item={item} />
         </div>
+
         <div className="vn-lbcap">
           <strong>{item.caption}</strong> — {item.sub}
           <br />
@@ -79,6 +86,7 @@ function Lightbox({ item, idx, total, onClose, onNext, onPrev }) {
             {idx + 1} / {total}
           </span>
         </div>
+
         <div className="vn-lbnav-row">
           <button className="vn-lbnav" onClick={onPrev} aria-label="Previous">‹</button>
           <button className="vn-lbnav" onClick={onNext} aria-label="Next">›</button>
@@ -92,6 +100,9 @@ function Lightbox({ item, idx, total, onClose, onNext, onPrev }) {
 export default function Gallery() {
   const [filter, setFilter] = useState("all");
   const [lbIdx, setLbIdx] = useState(null);
+  const [tappedId, setTappedId] = useState(null);
+  const [animKey, setAnimKey] = useState(0);
+  const tapTimerRef = useRef(null);
 
   const visible = GALLERY_ITEMS.filter((i) => filter === "all" || i.cat === filter);
 
@@ -116,21 +127,46 @@ export default function Gallery() {
     return () => { document.body.style.overflow = ""; };
   }, [lbIdx]);
 
+  // Re-trigger stagger animation on filter change
+  const handleFilterChange = (key) => {
+    setFilter(key);
+    setLbIdx(null);
+    setTappedId(null);
+    setAnimKey((k) => k + 1);
+  };
+
+  // Handle mobile tap: first tap shows overlay, second tap opens lightbox
+  const handleCardInteraction = (e, itemId, idx) => {
+    const isTouchDevice = window.matchMedia("(hover: none)").matches;
+
+    if (isTouchDevice) {
+      e.preventDefault();
+      if (tappedId === itemId) {
+        // Second tap → open lightbox
+        setLbIdx(idx);
+        setTappedId(null);
+      } else {
+        // First tap → show overlay
+        setTappedId(itemId);
+        // Auto-dismiss after 3s
+        clearTimeout(tapTimerRef.current);
+        tapTimerRef.current = setTimeout(() => setTappedId(null), 3000);
+      }
+    } else {
+      setLbIdx(idx);
+    }
+  };
+
+  // Dismiss tapped overlay when tapping elsewhere
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("visible"); }),
-      { threshold: 0.08, rootMargin: "0px 0px -30px 0px" }
-    );
+    const dismiss = () => setTappedId(null);
+    document.addEventListener("touchstart", dismiss, { passive: true });
+    return () => document.removeEventListener("touchstart", dismiss);
+  }, []);
 
-    document.querySelectorAll(".vn-sec").forEach((s) => observer.observe(s));
-
-    const cards = document.querySelectorAll(".vn-gi");
-    cards.forEach((card, index) => {
-      setTimeout(() => observer.observe(card), index * 60);
-    });
-
-    return () => observer.disconnect();
-  }, [filter]);
+  useEffect(() => {
+    return () => clearTimeout(tapTimerRef.current);
+  }, []);
 
   return (
     <section className="vn-sec vn-gal-bg" id="gallery">
@@ -148,36 +184,58 @@ export default function Gallery() {
             <button
               key={t.key}
               className={`vn-gtab${filter === t.key ? " active" : ""}`}
-              onClick={() => { setFilter(t.key); setLbIdx(null); }}
+              onClick={() => handleFilterChange(t.key)}
             >
               {t.label}
             </button>
           ))}
         </div>
 
-        <div className="vn-ggrid">
-          {visible.map((item, idx) => (
-            <div
-              className="vn-gi"
-              key={item.id}
-              onClick={() => setLbIdx(idx)}
-              role="button"
-              tabIndex={0}
-              aria-label={`View ${item.caption}`}
-              onKeyDown={(e) => e.key === "Enter" && setLbIdx(idx)}
-            >
-              <Thumb item={item} />
-              <div className="vn-gov">
-                <div className="vn-gcap">
-                  {item.caption}
-                  <span>{item.sub}</span>
+        <div className="vn-ggrid" key={animKey}>
+          {visible.map((item, idx) => {
+            const isTapped = tappedId === item.id;
+            return (
+              <div
+                className={`vn-gi${isTapped ? " tapped" : ""}`}
+                key={item.id}
+                style={{ "--stagger": idx }}
+                onClick={(e) => {
+                  // Stop dismiss handler on the card itself
+                  e.stopPropagation();
+                  handleCardInteraction(e, item.id, idx);
+                }}
+                onTouchStart={(e) => e.stopPropagation()}
+                role="button"
+                tabIndex={0}
+                aria-label={`View ${item.caption}`}
+                onKeyDown={(e) => e.key === "Enter" && setLbIdx(idx)}
+              >
+                <div className="vn-gi-inner">
+                  <Thumb item={item} isActive={isTapped} />
                 </div>
-              </div>
-            </div>
-          ))}
-        </div>
 
-       
+                {/* Category chip */}
+                <div className="vn-gchip">{item.cat}</div>
+
+                <div className="vn-gov">
+                  {/* Shine sweep */}
+                  <div className="vn-gov-shine" />
+
+                  <div className="vn-gcap">
+                    <span className="vn-gcap-title">{item.caption}</span>
+                    <span className="vn-gcap-sub">{item.sub}</span>
+                    <span className="vn-gcap-hint">
+                      {window.matchMedia?.("(hover: none)").matches ? "Tap again to view" : "Click to enlarge"}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Mobile tap pulse ring */}
+                {isTapped && <div className="vn-tap-ring" />}
+              </div>
+            );
+          })}
+        </div>
       </div>
 
       {lbIdx !== null && visible[lbIdx] && (

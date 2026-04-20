@@ -204,42 +204,344 @@ export const GLOBAL_STYLES = `
   .vn-ps h4{font-weight:700;margin-bottom:0.5rem;font-size:0.95rem;color:var(--td);}
   .vn-ps p{font-size:0.85rem;color:var(--tm);line-height:1.55;}
 
-  .vn-gal-bg{background:var(--ow);}
-  .vn-gal-hd{text-align:center;margin-bottom:1.5rem;}
-  .vn-gtabs{display:flex;justify-content:center;gap:0.6rem;flex-wrap:wrap;margin-bottom:2.5rem;}
-  .vn-gtab{padding:0.5rem 1.4rem;border-radius:50px;border:2px solid var(--bm);background:transparent;color:var(--bm);font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:600;cursor:pointer;transition:all 0.2s;}
-  .vn-gtab.active,.vn-gtab:hover{background:var(--bd);color:#fff;border-color:var(--bd);}
-  .vn-ggrid{display:grid;grid-template-columns:repeat(12,1fr);gap:12px;}
-  .vn-gi{position:relative;overflow:hidden;border-radius:14px;cursor:pointer;transition:transform 0.3s;}
-  .vn-gi:hover{transform:scale(1.025);}
-  .vn-gi:nth-child(1){grid-column:span 5;grid-row:span 2;}
-  .vn-gi:nth-child(2){grid-column:span 4;}
-  .vn-gi:nth-child(3){grid-column:span 3;}
-  .vn-gi:nth-child(4){grid-column:span 4;}
-  .vn-gi:nth-child(5){grid-column:span 3;}
-  .vn-gi:nth-child(6){grid-column:span 4;grid-row:span 2;}
-  .vn-gi:nth-child(7){grid-column:span 4;}
-  .vn-gi:nth-child(8){grid-column:span 4;}
-  .vn-gi:nth-child(9){grid-column:span 8;}
-  .vn-gph{width:100%;min-height:200px;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;font-size:2.5rem;}
-  .vn-gph p{font-size:0.7rem;font-weight:700;color:rgba(255,255,255,0.8);letter-spacing:0.8px;text-transform:uppercase;}
-  .vn-gov{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,61,98,0.88) 0%,transparent 55%);opacity:0;transition:opacity 0.3s;display:flex;align-items:flex-end;padding:1rem;}
-  .vn-gi:hover .vn-gov{opacity:1;}
-  .vn-gcap{color:#fff;font-size:0.85rem;font-weight:600;}
-  .vn-gcap span{display:block;font-size:0.72rem;font-weight:400;opacity:0.75;}
-  .vn-upbanner{background:linear-gradient(135deg,rgba(26,111,168,0.1),rgba(46,125,50,0.1));border:2px dashed rgba(26,111,168,0.3);border-radius:16px;padding:1.5rem;text-align:center;margin-top:2rem;}
-  .vn-upbanner p{color:var(--tm);font-size:0.88rem;}
+  /* ==================== GALLERY ==================== */
 
-  .vn-lb{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.93);display:flex;align-items:center;justify-content:center;padding:2rem;}
-  .vn-lbi{position:relative;max-width:700px;width:100%;}
-  .vn-lbc{min-height:300px;background:#0d1b2a;border-radius:16px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1rem;border:1px solid rgba(79,195,247,0.1);}
-  .vn-lbx{position:absolute;top:-42px;right:0;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;opacity:0.7;transition:opacity 0.2s;}
-  .vn-lbx:hover{opacity:1;}
-  .vn-lbcap{text-align:center;color:rgba(255,255,255,0.75);margin-top:1rem;font-size:0.9rem;}
-  .vn-lbnav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.12);border:none;color:#fff;width:44px;height:44px;border-radius:50%;font-size:1.3rem;cursor:pointer;transition:background 0.2s;}
-  .vn-lbnav:hover{background:rgba(255,255,255,0.25);}
-  .vn-lbprev{left:-60px;}
-  .vn-lbnext{right:-60px;}
+  .vn-gal-bg { background: var(--ow); }
+  .vn-gal-hd { text-align: center; margin-bottom: 1.5rem; }
+
+  /* Filter tabs */
+  .vn-gtabs {
+    display: flex; justify-content: center; gap: 0.6rem;
+    flex-wrap: wrap; margin-bottom: 2.5rem;
+  }
+  .vn-gtab {
+    padding: 0.5rem 1.4rem; border-radius: 50px;
+    border: 2px solid var(--bm); background: transparent;
+    color: var(--bm); font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem; font-weight: 600; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .vn-gtab.active, .vn-gtab:hover {
+    background: var(--bd); color: #fff; border-color: var(--bd);
+  }
+
+  /* ── Grid layout ── */
+  .vn-ggrid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 14px;
+  }
+
+  /* Card stagger animation */
+  .vn-gi {
+    position: relative; overflow: hidden; border-radius: 16px;
+    cursor: pointer;
+    /* Staggered fade-in on filter change */
+    opacity: 0;
+    transform: translateY(24px) scale(0.97);
+    animation: gi-appear 0.45s ease forwards;
+    animation-delay: calc(var(--stagger, 0) * 55ms);
+    /* Thin border for depth */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1), 0 0 0 1px rgba(255,255,255,0.55);
+  }
+
+  @keyframes gi-appear {
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* Grid spans — same as before */
+  .vn-gi:nth-child(1)  { grid-column: span 5; grid-row: span 2; }
+  .vn-gi:nth-child(2)  { grid-column: span 4; }
+  .vn-gi:nth-child(3)  { grid-column: span 3; }
+  .vn-gi:nth-child(4)  { grid-column: span 4; }
+  .vn-gi:nth-child(5)  { grid-column: span 3; }
+  .vn-gi:nth-child(6)  { grid-column: span 4; grid-row: span 2; }
+  .vn-gi:nth-child(7)  { grid-column: span 4; }
+  .vn-gi:nth-child(8)  { grid-column: span 4; }
+  .vn-gi:nth-child(9)  { grid-column: span 8; }
+
+  /* Inner wrapper so we can zoom the image without clipping the card */
+  .vn-gi-inner {
+    width: 100%; height: 100%; overflow: hidden;
+  }
+
+  /* Image zoom on hover/tap */
+  .vn-gi-img {
+    transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
+  }
+  .vn-gi:hover .vn-gi-img,
+  .vn-gi.tapped .vn-gi-img {
+    transform: scale(1.08);
+  }
+
+  /* ── Placeholder card ── */
+  .vn-gph {
+    width: 100%; min-height: 200px; height: 100%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 0.5rem;
+    background: var(--ph-bg, #0a3d62);
+    position: relative; overflow: hidden;
+    transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .vn-gi:hover .vn-gph,
+  .vn-gi.tapped .vn-gph {
+    transform: scale(1.06);
+  }
+
+  /* Dot-grid texture inside placeholder */
+  .vn-gph::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 0);
+    background-size: 18px 18px;
+    pointer-events: none;
+  }
+
+  .vn-gph-icon {
+    font-size: 2.8rem;
+    position: relative; z-index: 1;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.35));
+    transition: transform 0.4s ease;
+  }
+  .vn-gi:hover .vn-gph-icon,
+  .vn-gi.tapped .vn-gph-icon {
+    transform: scale(1.15) translateY(-4px);
+  }
+
+  .vn-gph p {
+    font-size: 0.7rem; font-weight: 700;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 0.8px; text-transform: uppercase;
+    position: relative; z-index: 1;
+  }
+
+  /* Animated shine sweep across placeholder */
+  .vn-gph-shine {
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 20%,
+      rgba(255,255,255,0.13) 50%,
+      transparent 80%
+    );
+    background-size: 200% 100%;
+    background-position: -100% 0;
+    transition: background-position 0s;
+    pointer-events: none;
+  }
+  .vn-gi:hover .vn-gph-shine,
+  .vn-gi.tapped .vn-gph-shine {
+    background-position: 200% 0;
+    transition: background-position 0.65s ease;
+  }
+
+  /* ── Category chip ── */
+  .vn-gchip {
+    position: absolute; top: 10px; left: 10px; z-index: 3;
+    background: rgba(10,61,98,0.78);
+    backdrop-filter: blur(6px);
+    color: rgba(255,255,255,0.9);
+    font-size: 0.65rem; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    padding: 0.22rem 0.65rem; border-radius: 50px;
+    border: 1px solid rgba(79,195,247,0.3);
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .vn-gi:hover .vn-gchip,
+  .vn-gi.tapped .vn-gchip {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── Overlay ── */
+  .vn-gov {
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(4,15,26,0.92) 0%,
+      rgba(10,61,98,0.5) 45%,
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    display: flex; align-items: flex-end; padding: 1rem;
+    overflow: hidden;
+  }
+  .vn-gi:hover .vn-gov,
+  .vn-gi.tapped .vn-gov {
+    opacity: 1;
+  }
+
+  /* Shine sweep on the overlay */
+  .vn-gov-shine {
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      115deg,
+      transparent 30%,
+      rgba(79,195,247,0.07) 50%,
+      transparent 70%
+    );
+    background-size: 250% 100%;
+    background-position: -100% 0;
+    pointer-events: none;
+  }
+  .vn-gi:hover .vn-gov-shine,
+  .vn-gi.tapped .vn-gov-shine {
+    background-position: 200% 0;
+    transition: background-position 0.7s ease;
+  }
+
+  /* ── Caption inside overlay ── */
+  .vn-gcap {
+    display: flex; flex-direction: column; gap: 0.22rem;
+    position: relative; z-index: 1;
+    transform: translateY(10px);
+    transition: transform 0.35s ease;
+  }
+  .vn-gi:hover .vn-gcap,
+  .vn-gi.tapped .vn-gcap {
+    transform: translateY(0);
+  }
+
+  .vn-gcap-title {
+    color: #fff; font-size: 0.88rem; font-weight: 700;
+    line-height: 1.25;
+  }
+  .vn-gcap-sub {
+    font-size: 0.72rem; font-weight: 400;
+    color: rgba(255,255,255,0.68);
+  }
+  .vn-gcap-hint {
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    font-size: 0.65rem; font-weight: 600;
+    color: var(--bl); letter-spacing: 0.5px;
+    margin-top: 0.15rem;
+    opacity: 0;
+    transition: opacity 0.3s 0.1s ease;
+  }
+  .vn-gcap-hint::before {
+    content: '↗';
+    font-size: 0.7rem;
+  }
+  .vn-gi:hover .vn-gcap-hint,
+  .vn-gi.tapped .vn-gcap-hint {
+    opacity: 1;
+  }
+
+  /* ── Mobile tap pulse ring ── */
+  @keyframes tap-ring-pulse {
+    0%   { transform: scale(0.7); opacity: 0.7; }
+    100% { transform: scale(2.2); opacity: 0; }
+  }
+  .vn-tap-ring {
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    border: 2px solid var(--bl);
+    animation: tap-ring-pulse 0.6s ease-out forwards;
+    pointer-events: none; z-index: 10;
+  }
+
+  /* ── Upload banner ── */
+  .vn-upbanner {
+    background: linear-gradient(135deg, rgba(26,111,168,0.1), rgba(46,125,50,0.1));
+    border: 2px dashed rgba(26,111,168,0.3);
+    border-radius: 16px; padding: 1.5rem;
+    text-align: center; margin-top: 2rem;
+  }
+  .vn-upbanner p { color: var(--tm); font-size: 0.88rem; }
+
+  /* ── MOBILE: single column + always-visible caption bar ── */
+  @media (max-width: 768px) {
+    .vn-ggrid {
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .vn-gi:nth-child(n) {
+      grid-column: span 1 !important;
+      grid-row: span 1 !important;
+    }
+    /* On mobile, show a persistent bottom bar instead of relying on hover */
+    .vn-gov {
+      opacity: 1;
+      background: linear-gradient(to top, rgba(4,15,26,0.82) 0%, transparent 60%);
+    }
+    .vn-gcap { transform: translateY(0); }
+    .vn-gcap-hint { opacity: 0.9; } /* always show "tap again to view" */
+    .vn-gov-shine { display: none; }
+    /* Chip always visible on mobile */
+    .vn-gchip { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 480px) {
+    .vn-ggrid { grid-template-columns: 1fr; }
+    .vn-gi:nth-child(n) { grid-column: span 1 !important; }
+  }
+
+  /* ==================== LIGHTBOX ==================== */
+  .vn-lb {
+    position: fixed; inset: 0; z-index: 9999;
+    background: rgba(0,0,0,0.93);
+    display: flex; align-items: center; justify-content: center; padding: 2rem;
+    animation: lb-fade-in 0.2s ease;
+  }
+  @keyframes lb-fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  .vn-lbi {
+    position: relative; max-width: 700px; width: 100%;
+    animation: lb-slide-up 0.28s ease;
+  }
+  @keyframes lb-slide-up {
+    from { transform: translateY(20px); opacity: 0; }
+    to   { transform: translateY(0); opacity: 1; }
+  }
+
+  .vn-lbc {
+    min-height: 300px; background: #0d1b2a;
+    border-radius: 16px; display: flex;
+    align-items: center; justify-content: center;
+    flex-direction: column; gap: 1rem;
+    border: 1px solid rgba(79,195,247,0.12);
+    overflow: hidden;
+  }
+
+  .vn-lbx {
+    position: absolute; top: -42px; right: 0;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff; font-size: 1.3rem;
+    width: 36px; height: 36px; border-radius: 50%;
+    cursor: pointer; display: flex; align-items: center;
+    justify-content: center;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .vn-lbx:hover { background: rgba(255,255,255,0.22); transform: rotate(90deg); }
+
+  .vn-lbcap {
+    text-align: center; color: rgba(255,255,255,0.75);
+    margin-top: 1rem; font-size: 0.9rem;
+  }
+
+  .vn-lbnav-row {
+    display: flex; justify-content: space-between;
+    margin-top: 1.2rem;
+  }
+
+  .vn-lbnav {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.18);
+    color: #fff; width: 48px; height: 48px;
+    border-radius: 50%; font-size: 1.5rem;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .vn-lbnav:hover { background: rgba(255,255,255,0.22); transform: scale(1.1); }
 
   .vn-ctc{background:linear-gradient(135deg,#0a3d62 0%,#1b5e20 100%);color:#fff;text-align:center;}
   .vn-ctc .vn-ttl{color:#fff;}
