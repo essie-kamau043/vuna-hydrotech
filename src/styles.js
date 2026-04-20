@@ -177,11 +177,52 @@ export const GLOBAL_STYLES = `
   .vn-dropsvg{width:100%;height:100%;filter:drop-shadow(0 20px 60px rgba(26,111,168,0.5));}
 
   /* ==================== STATS ==================== */
-  .vn-stats{background:var(--bd);padding:1.8rem 2rem;display:flex;justify-content:center;flex-wrap:wrap;border-bottom:3px solid var(--gm);}
-  .vn-stat{text-align:center;padding:0.5rem 2.5rem;border-right:1px solid rgba(255,255,255,0.1);}
-  .vn-stat:last-child{border-right:none;}
-  .vn-sn{font-family:'Fraunces',serif;font-size:2.2rem;font-weight:900;color:var(--bl);display:block;}
-  .vn-sl{color:rgba(255,255,255,0.7);font-size:0.82rem;font-weight:500;}
+    /* ==================== STATS ==================== */
+  .vn-stats {
+    background: var(--bd);
+    padding: 1.2rem 1rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    border-bottom: 3px solid var(--gm);
+  }
+
+  .vn-stat {
+    text-align: center;
+    min-width: 120px;
+  }
+
+  .vn-sn {
+    font-family: 'Fraunces', serif;
+    font-size: 2.1rem;
+    font-weight: 900;
+    color: var(--bl);
+    display: block;
+    line-height: 1;
+  }
+
+  .vn-sl {
+    color: rgba(255,255,255,0.75);
+    font-size: 0.82rem;
+    font-weight: 500;
+    display: block;
+    margin-top: 4px;
+  }
+
+  /* Make it more compact on mobile - closer to one line feel */
+  @media (max-width: 768px) {
+    .vn-stats {
+      padding: 1rem 0.8rem;
+      gap: 1.2rem;
+    }
+    .vn-stat {
+      min-width: 90px;
+    }
+    .vn-sn {
+      font-size: 1.85rem;
+    }
+  }
 
   /* ==================== SECTION BASE ==================== */
   .vn-sec{padding:5rem 1.2rem;}

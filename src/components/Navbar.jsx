@@ -10,6 +10,7 @@ export default function Navbar() {
       <div className="vn-logo">
         <div className="vn-logo-txt">
           VUNA <span>HYDROTECH</span> (K) LTD
+          
           <span className="vn-logo-sub">Water Solutions That Last Generations</span>
         </div>
       </div>

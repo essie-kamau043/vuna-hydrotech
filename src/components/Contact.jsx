@@ -205,7 +205,7 @@ export default function Contact() {
               <h3>📍 Contact Details</h3>
               {[
                 { icon: "📞", label: "Phone / WhatsApp", val: <a href="tel:0701036336">0701 036 336</a> },
-                { icon: "✉️", label: "Email", val: <a href="mailto:info@vunahydrotech.co.ke">info@vunahydrotech.co.ke</a> },
+                { icon: "✉️", label: "Email", val: <a href="mailto:info@vunahydrotech.co.ke">skyharvestas@gmail.com</a> },
                 { icon: "📍", label: "Coverage", val: <span>All 47 Counties — Kenya Wide</span> },
               ].map(i => (
                 <div className="vn-ii" key={i.label}>

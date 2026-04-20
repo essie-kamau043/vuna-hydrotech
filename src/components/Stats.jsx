@@ -4,12 +4,22 @@ import React from 'react';
 export default function Stats() {
   return (
     <div className="vn-stats">
-      {[["500+","Water Projects"],["47","Counties Served"],["5yr","HDPE Warranty"],["24/7","Support"]].map(([n,l])=>(
-        <div className="vn-stat" key={l}>
-          <span className="vn-sn">{n}</span>
-          <span className="vn-sl">{l}</span>
-        </div>
-      ))}
+      <div className="vn-stat">
+        <span className="vn-sn">500+</span>
+        <span className="vn-sl">Water Projects</span>
+      </div>
+      <div className="vn-stat">
+        <span className="vn-sn">47</span>
+        <span className="vn-sl">Counties Served</span>
+      </div>
+      <div className="vn-stat">
+        <span className="vn-sn">5yr</span>
+        <span className="vn-sl">HDPE Warranty</span>
+      </div>
+      <div className="vn-stat">
+        <span className="vn-sn">24/7</span>
+        <span className="vn-sl">Support</span>
+      </div>
     </div>
   );
 }
