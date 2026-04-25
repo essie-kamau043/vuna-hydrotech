@@ -190,7 +190,7 @@ export default function Contact() {
                     name="message"
                     value={form.message}
                     onChange={handleChange}
-                    placeholder="Land size, number of livestock, any other info..."
+                    placeholder="Dam Capacity In Litres"
                     rows={4}
                   />
                 </div>

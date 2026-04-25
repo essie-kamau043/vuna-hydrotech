@@ -691,5 +691,30 @@ export const GLOBAL_STYLES = `
     position: relative;
     overflow: hidden;
   }
+      /* Smooth Scrolling Fix - Especially for Mobile */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Better anchor link behavior on mobile */
+  .vn-nav-links a,
+  .vn-nav-mobile a {
+    scroll-behavior: smooth;
+  }
+
+  /* Extra padding at top of sections so they don't hide under fixed navbar */
+  #home, #gallery, #contact, #process, #why {
+    scroll-margin-top: 90px;
+  }
+
+  /* Optional: Improve touch scrolling feel on mobile */
+  @media (max-width: 768px) {
+    html {
+      scroll-behavior: smooth;
+    }
     
+    .vn-sec {
+      scroll-margin-top: 100px;
+    }
+  }
 `;
