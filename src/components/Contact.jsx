@@ -105,7 +105,7 @@ export default function Contact() {
             lineHeight: "1.6"
           }}>
             <div style={{ fontSize: "3.5rem", marginBottom: "1rem" }}>🎉</div>
-            <h3 style={{ margin: "0 0 0.8rem 0", color: "#2e7d32" }}>
+            <h3 style={{ margin: "0 0 0.8rem 0", color: "#2e7d" }}>
               Thank You, {form.name ? form.name.split(" ")[0] : "Customer"}!
             </h3>
             <p style={{ margin: 0, fontSize: "1.05rem" }}>

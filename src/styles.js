@@ -691,4 +691,58 @@ export const GLOBAL_STYLES = `
     position: relative;
     overflow: hidden;
   }
+      /* Clean Responsive Gallery Grid */
+  .vn-ggrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .vn-gimg {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 14px;
+    display: block;
+  }
+
+  .vn-gi {
+    position: relative;
+    overflow: hidden;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .vn-gi:hover {
+    transform: scale(1.03);
+  }
+
+  .vn-gov {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10,61,98,0.85) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem;
+  }
+
+  .vn-gi:hover .vn-gov {
+    opacity: 1;
+  }
+
+  .vn-gcap {
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .vn-gcap span {
+    display: block;
+    font-size: 0.78rem;
+    opacity: 0.85;
+    margin-top: 4px;
+  }
 `;
