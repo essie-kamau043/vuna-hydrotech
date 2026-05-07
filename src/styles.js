@@ -622,13 +622,20 @@ export const GLOBAL_STYLES = `
   .vn-fphone{color:var(--gl);font-size:1rem;font-weight:700;display:block;margin-bottom:0.4rem;text-decoration:none;}
 
   /* ==================== WHATSAPP + BACK TO TOP ==================== */
-  .vn-wa{position:fixed;bottom:25px;right:25px;z-index:9999;width:68px;height:68px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(37,211,102,0.55);transition:all 0.3s cubic-bezier(0.4,0,0.2,1);}
-  .vn-wa:hover{transform:scale(1.15) translateY(-4px);box-shadow:0 15px 40px rgba(37,211,102,0.65);}
-  .vn-wa-icon{position:relative;width:58px;height:58px;background:rgba(255,255,255,0.22);border-radius:50%;display:flex;align-items:center;justify-content:center;}
-  .vn-wa-pulse{position:absolute;inset:-12px;background:#25D366;border-radius:50%;animation:wa-pulse 2.6s ease-in-out infinite;opacity:0.28;z-index:-1;}
+  .vn-wa{position:fixed;bottom:28px;right:28px;z-index:9000;display:flex;align-items:center;gap:0;cursor:pointer;text-decoration:none;}
+  .vn-wa-label{background:#25d366;color:#fff;font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:700;padding:0.5rem 1rem 0.5rem 1.2rem;border-radius:50px 0 0 50px;opacity:0;transform:translateX(10px);transition:opacity 0.3s,transform 0.3s;white-space:nowrap;box-shadow:-4px 0 16px rgba(0,0,0,0.1);}
+  .vn-wa:hover .vn-wa-label{opacity:1;transform:translateX(0);}
+  .vn-wa-btn{width:58px;height:58px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(37,211,102,0.45);transition:transform 0.2s,box-shadow 0.2s;z-index:1;}
+  .vn-wa:hover .vn-wa-btn{transform:scale(1.08);box-shadow:0 10px 32px rgba(37,211,102,0.6);}
+  .vn-wa-pulse{position:absolute;inset:0;border-radius:50%;background:rgba(37,211,102,0.4);animation:wa-pulse 2s ease-out infinite;}
+  @keyframes wa-pulse{0%{transform:scale(1);opacity:0.8}70%{transform:scale(1.5);opacity:0}100%{transform:scale(1.5);opacity:0}}
+  .vn-wa{bottom:20px;right:16px;}
+    .vn-wa-btn{width:52px;height:52px;}
+    .vn-wa-label{display:none;}
 
   .vn-back-to-top{position:fixed;bottom:110px;right:25px;z-index:9998;width:48px;height:48px;background:#0a3d62;color:white;border:none;border-radius:50%;font-size:1.4rem;cursor:pointer;box-shadow:0 6px 20px rgba(10,61,98,0.4);transition:all 0.3s ease;}
   .vn-back-to-top:hover{background:#1a6fa8;transform:scale(1.1);}
+
 
   /* ==================== ANIMATIONS ==================== */
   @keyframes fadeInUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
